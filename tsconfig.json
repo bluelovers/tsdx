@@ -10,7 +10,7 @@
     "declaration": false,
     "module": "commonjs",
     "rootDir": "src",
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
