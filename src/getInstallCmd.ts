@@ -2,7 +2,7 @@ import execa from 'execa';
 
 let cmd: InstallCommand;
 
-export type InstallCommand = 'yarn' | 'npm';
+export type InstallCommand = 'yarn' | 'npm' | 'yarn-tool';
 
 export default async function getInstallCmd(): Promise<InstallCommand> {
   if (cmd) {
@@ -10,10 +10,15 @@ export default async function getInstallCmd(): Promise<InstallCommand> {
   }
 
   try {
-    await execa('yarnpkg', ['--version']);
-    cmd = 'yarn';
+    await execa('yarn-tool', ['--version']);
+    cmd = 'yarn-tool';
   } catch (e) {
-    cmd = 'npm';
+    try {
+      await execa('yarnpkg', ['--version']);
+      cmd = 'yarn';
+    } catch (e) {
+      cmd = 'npm';
+    }
   }
 
   return cmd;

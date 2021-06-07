@@ -8,6 +8,7 @@ export default function getInstallArgs(
     case 'npm':
       return ['install', ...packages, '--save-dev'];
     case 'yarn':
+    case 'yarn-tool':
       return ['add', ...packages, '--dev'];
   }
 }
