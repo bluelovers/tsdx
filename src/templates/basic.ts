@@ -4,15 +4,16 @@ const basicTemplate: Template = {
   name: 'basic',
   dependencies: [
     'husky',
-    'tsdx',
+    //'tsdx',
     'tslib',
-    'typescript',
+    'typescript@next',
     'size-limit',
     '@size-limit/preset-small-lib',
+    '@bluelovers/tsconfig'
   ],
   packageJson: {
     // name: safeName,
-    version: '0.1.0',
+    version: '1.0.0',
     license: 'MIT',
     // author: author,
     main: 'dist/index.js',
@@ -24,14 +25,16 @@ const basicTemplate: Template = {
     },
     scripts: {
       start: 'tsdx watch',
-      build: 'tsdx build',
-      test: 'tsdx test',
+      build: 'tsdx build --target node',
+      test: 'tsdx test --passWithNoTests',
       lint: 'tsdx lint',
       prepare: 'tsdx build',
       size: 'size-limit',
       analyze: 'size-limit --why',
     },
-    peerDependencies: {},
+    peerDependencies: {
+
+    },
     /*
     'size-limit': [
       {
