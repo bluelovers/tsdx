@@ -81,8 +81,7 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
           method: 'usage-pure',
         },
         {
-          name: '@babel/plugin-proposal-class-properties',
-          loose: true,
+          name: '@babel/plugin-transform-typescript',
         },
         isTruthy(customOptions.extractErrors) && {
           name: './errors/transformErrorMessages',
@@ -126,6 +125,9 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
           targets: customOptions.targets,
           modules: false,
           loose: true,
+        },
+        {
+          name: '@babel/preset-typescript',
         },
       ]);
 
