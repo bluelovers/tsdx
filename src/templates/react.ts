@@ -1,7 +1,8 @@
 import { Template } from './template';
 
 import basicTemplate from './basic';
-import { PackageJson } from 'type-fest';
+//import { PackageJson } from 'type-fest';
+import PackageJson from '@ts-type/package-dts/package-json';
 
 const reactTemplate: Template = {
   name: 'react',
