@@ -109,6 +109,10 @@ prog
     )}]`
   )
   .example('create --template react mypackage')
+  .option(
+    '--install',
+    `Auto run install`
+  )
   .action(async (pkg: string, opts: any) => {
     console.log(
       chalk.blue(`
@@ -238,17 +242,28 @@ prog
     const templateConfig = templates[template as keyof typeof templates];
     const { dependencies: deps } = templateConfig;
 
-    const installSpinner = ora(Messages.installing(deps.sort())).start();
-    try {
-      const cmd = await getInstallCmd();
-      await execa(cmd, getInstallArgs(cmd, deps));
-      installSpinner.succeed('Installed dependencies');
-      console.log(await Messages.start(pkg));
-    } catch (error) {
-      installSpinner.fail('Failed to install dependencies');
-      logError(error);
-      process.exit(1);
+    const cmd = await getInstallCmd();
+    const installArgs = getInstallArgs(cmd, deps)
+
+    if (opts.install)
+    {
+      const installSpinner = ora(Messages.installing(deps.sort())).start();
+      try {
+
+        await execa(cmd, installArgs);
+        installSpinner.succeed('Installed dependencies');
+        console.log(await Messages.start(pkg));
+      } catch (error) {
+        installSpinner.fail('Failed to install dependencies');
+        logError(error);
+        process.exit(1);
+      }
     }
+    else
+    {
+      console.log(`\n${chalk.yellow([cmd].concat(installArgs as any[]).join(' '))}\n`);
+    }
+
   });
 
 prog
