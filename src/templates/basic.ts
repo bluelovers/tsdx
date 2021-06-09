@@ -25,12 +25,19 @@ const basicTemplate: Template = {
     },
     scripts: {
       start: 'tsdx watch',
-      build: 'tsdx build --target node',
+      "build": "npm run build && npm run build:dts",
+      "build:tsdx": 'tsdx build --target node',
+      "build:dts": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --no-banner",
       test: 'tsdx test --passWithNoTests',
       lint: 'tsdx lint',
+      "preversion": "npm run build && npm run test",
       prepare: 'tsdx build',
       size: 'size-limit',
       analyze: 'size-limit --why',
+    },
+    "devDependencies": {
+      "@bluelovers/tsconfig": "^1.0.22",
+      "dts-bundle-generator": "^5.9.0",
     },
     peerDependencies: {
 
