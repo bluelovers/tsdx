@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1-dev.20210610](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.1-dev.20210607...@bluelovers/tsdx@0.14.1-dev.20210610) (2021-06-09)
+
+
+### ✨　Features
+
+* use `@bluelovers/tsconfig/tsdx/index.json` ([10e353d](https://github.com/bluelovers/tsdx/commit/10e353d220b7476d773d39b52bf637d155068adc))
+
+
+### 🔖　Miscellaneous
+
+* . ([fa0f268](https://github.com/bluelovers/tsdx/commit/fa0f268f0fdbe220201f7e5216a5588482528fdb))
+
+
+
+
+
 ## 0.14.1-dev.20210607 (2021-06-07)
 
 
