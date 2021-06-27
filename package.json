@@ -74,6 +74,7 @@
     "asyncro": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
+    "babel-plugin-const-enum": "^1.0.1",
     "babel-plugin-dev-expression": "^0.2.2",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-polyfill-regenerator": "^0.2.2",
