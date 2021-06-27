@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.1-dev.20210610...@bluelovers/tsdx@0.14.2) (2021-06-27)
+
+
+### ✨　Features
+
+* Transform TypeScript const enums ([0cf79c3](https://github.com/bluelovers/tsdx/commit/0cf79c361f71519eb5c497589f516aaec4e108cb))
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([b06231c](https://github.com/bluelovers/tsdx/commit/b06231cbecbef963ef8f7936491ed2124c1b31d6))
+
+
+
+
+
 ## [0.14.1-dev.20210610](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.1-dev.20210607...@bluelovers/tsdx@0.14.1-dev.20210610) (2021-06-09)
 
 
