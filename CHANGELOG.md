@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.3...@bluelovers/tsdx@0.14.4) (2021-06-27)
+
+
+### ✨　Features
+
+* add github coverage ([36a3bdf](https://github.com/bluelovers/tsdx/commit/36a3bdfb2773ca6d7d5c9f0e64331990cb992a95))
+
+
+
+
+
 ## [0.14.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.2...@bluelovers/tsdx@0.14.3) (2021-06-27)
 
 **Note:** Version bump only for package @bluelovers/tsdx
