@@ -82,6 +82,7 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
         },
         {
           name: 'babel-plugin-const-enum',
+          transform: "removeConst",
         },
         {
           name: '@babel/plugin-transform-typescript',
