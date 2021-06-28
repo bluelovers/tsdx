@@ -168,7 +168,27 @@ export async function createRollupConfig(
           compilerOptions: {
             sourceMap: true,
             declaration: true,
-            jsx: 'react',
+
+            "target": "ES2019",
+            "jsx": "preserve",
+            "experimentalDecorators": true,
+            "allowSyntheticDefaultImports": true,
+            "resolveJsonModule": true,
+
+            "strictBindCallApply": true,
+            "strictNullChecks": false,
+            "strictFunctionTypes": true,
+
+            "preserveConstEnums": true,
+
+            "noErrorTruncation": true,
+
+            "pretty": true,
+
+            "inlineSourceMap": false,
+            "skipLibCheck": true,
+
+            "newLine": "lf"
           },
         },
         tsconfigOverride: {
@@ -209,7 +229,7 @@ export async function createRollupConfig(
             pure_getters: true,
             passes: 10,
           },
-          ecma: 5,
+          ecma: 2019,
           toplevel: opts.format === 'cjs',
           warnings: true,
         }),
