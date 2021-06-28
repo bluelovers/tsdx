@@ -12,6 +12,8 @@ import resolve, {
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import ts from 'typescript';
+// @ts-ignore
+import cleanup from 'rollup-plugin-cleanup';
 
 import { extractErrors } from './errors/extractErrors';
 import { babelPluginTsdx } from './babelPluginTsdx';
@@ -167,7 +169,8 @@ export async function createRollupConfig(
           ],
           compilerOptions: {
             sourceMap: true,
-            declaration: true,
+            declaration: false,
+            "removeComments": true,
 
             "target": "ES2019",
             "jsx": "preserve",
@@ -219,6 +222,14 @@ export async function createRollupConfig(
         replace({
           'process.env.NODE_ENV': JSON.stringify(opts.env),
         }),
+      /*
+      cleanup({
+        extensions: [...DEFAULT_BABEL_EXTENSIONS, 'ts', 'tsx'],
+        // @ts-ignore
+        comments: false,
+        maxEmptyLines: 0,
+      }),
+       */
       sourceMaps(),
       shouldMinify &&
         terser({
