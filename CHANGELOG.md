@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.6](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.5...@bluelovers/tsdx@0.14.6) (2021-06-28)
+
+
+### ✨　Features
+
+* update terser and typescript default config ([cc9ec61](https://github.com/bluelovers/tsdx/commit/cc9ec61f686ba7c96db325e19ac8d98a886041a8))
+
+
+
+
+
 ## [0.14.5](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.4...@bluelovers/tsdx@0.14.5) (2021-06-28)
 
 **Note:** Version bump only for package @bluelovers/tsdx
