@@ -128,7 +128,7 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
           name: '@babel/preset-env',
           targets: customOptions.targets,
           modules: false,
-          loose: true,
+          //loose: true,
         },
         {
           name: '@babel/preset-typescript',
