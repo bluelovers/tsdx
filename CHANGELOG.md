@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.14](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.10...@bluelovers/tsdx@0.14.14) (2021-07-01)
+
+
+### ♻️　Chores
+
+* **deps:** add `@yarn-tool/require-resolve` , `dts-bundle-generator` ([4f3f58f](https://github.com/bluelovers/tsdx/commit/4f3f58fc248e7fec680c13836c82489dcca6e1f0))
+
+
+
+
+
 ## [0.14.10](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.9...@bluelovers/tsdx@0.14.10) (2021-07-01)
 
 

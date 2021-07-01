@@ -1,6 +1,6 @@
 {
   "name": "@bluelovers/tsdx",
-  "version": "0.14.10",
+  "version": "0.14.14",
   "description": "Zero-config TypeScript package development",
   "keywords": [
     "react",
@@ -37,7 +37,7 @@
     "test:post-build": "node dist/index.js test",
     "build": "tsc -p tsconfig.json",
     "npm:publish": "npm publish",
-    "npm:publish:bump": "yarn-tool version && yarn run preversion && npm publish",
+    "npm:publish:bump": "yarn-tool version && yarn run build && npm publish",
     "npm:publish:lerna": "lerna publish --yes --bump patch",
     "preversion": "echo preversion && yarn run test",
     "prepare": "tsc -p tsconfig.json",
