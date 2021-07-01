@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.10](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.9...@bluelovers/tsdx@0.14.10) (2021-07-01)
+
+
+### 🐛　Bug Fixes
+
+* avoid build Nullish Coalescing ([5d05924](https://github.com/bluelovers/tsdx/commit/5d05924fef27ef447acef6536263c1155d5a279d))
+
+
+### ✨　Features
+
+* remove `loose: true` ([c3e5e8e](https://github.com/bluelovers/tsdx/commit/c3e5e8e74e9ad3a9949cc3147ae3717f4c3b336d))
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([9b7b2b0](https://github.com/bluelovers/tsdx/commit/9b7b2b01b4a7ad17b8bd5aac22e528fb3fe347a9))
+
+
+
+
+
 ## [0.14.9](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.8...@bluelovers/tsdx@0.14.9) (2021-06-28)
 
 **Note:** Version bump only for package @bluelovers/tsdx
