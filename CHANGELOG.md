@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.14...@bluelovers/tsdx@1.0.1) (2021-11-17)
+
+
+### ♻️　Chores
+
+* update deps and node 17 ([216b2d3](https://github.com/bluelovers/tsdx/commit/216b2d39075b5443840d8b4691c3df198d5ae31d))
+
+
+
+
+
 ## [0.14.14](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.10...@bluelovers/tsdx@0.14.14) (2021-07-01)
 
 
