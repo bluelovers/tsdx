@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.0.1...@bluelovers/tsdx@1.0.2) (2021-11-21)
+
+
+### ✨　Features
+
+* tweak default configuration ([4d57e9d](https://github.com/bluelovers/tsdx/commit/4d57e9d1819913af95086c951fe226179cf03c11))
+* optimizeConstEnums => true ([4cbb6fb](https://github.com/bluelovers/tsdx/commit/4cbb6fbdb45e0766115bcbfde99f58d50277b1e2))
+
+
+### 📦　Code Refactoring
+
+* update import ([30f9355](https://github.com/bluelovers/tsdx/commit/30f935593752790428442baee9b542f87299498a))
+
+
+
+
+
 ## [1.0.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@0.14.14...@bluelovers/tsdx@1.0.1) (2021-11-17)
 
 

@@ -36,7 +36,7 @@ const basicTemplate: Template = {
     scripts: {
       start: 'tsdx watch',
       "build": "npm run build:tsdx && npm run build:dts",
-      "build:tsdx": 'tsdx build --target node',
+      "build:tsdx": 'tsdx build --target node --name index',
       "build:dts": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --no-banner",
       test: 'tsdx test --passWithNoTests',
       lint: 'tsdx lint',
