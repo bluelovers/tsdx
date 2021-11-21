@@ -380,8 +380,9 @@ prog
   .describe('Build your project once and exit')
   .option('--entry, -i', 'Entry module')
   .example('build --entry src/foo.tsx')
-  .option('--target', 'Specify your target environment', 'browser')
+  .option('--target', 'Specify your target environment', 'node')
   .example('build --target node')
+  .example('build --target browser')
   .option('--name', 'Specify name exposed in UMD builds')
   .example('build --name Foo')
   .option('--format', 'Specify module format(s)', 'cjs,esm')
@@ -432,7 +433,7 @@ prog
 async function normalizeOpts(opts: WatchOpts): Promise<NormalizedOpts> {
   return {
     ...opts,
-    name: opts.name || appPackageJson.name,
+    name: opts.name || 'index' || appPackageJson.name,
     input: await getInputs(opts.entry, appPackageJson.source),
     format: opts.format.split(',').map((format: string) => {
       if (format === 'es') {

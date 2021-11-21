@@ -18,6 +18,7 @@ const basicTemplate: Template = {
     // author: author,
     main: 'dist/index.js',
     // module: `dist/${safeName}.esm.js`,
+    module: `dist/index.esm.js`,
     typings: `dist/index.d.ts`,
     "files": [
       "tsconfig.json",

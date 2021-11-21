@@ -85,6 +85,9 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
           transform: "removeConst",
         },
         {
+          name: '@babel/plugin-syntax-top-level-await',
+        },
+        {
           name: '@babel/plugin-transform-typescript',
           /**
            * @see https://babeljs.io/docs/en/babel-plugin-transform-typescript#optimizeconstenums
