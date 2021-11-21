@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { realpathSync } from 'fs-extra';
 import path from 'path';
 import camelCase from 'camelcase';
 
@@ -25,7 +25,7 @@ export const external = (id: string) =>
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebookincubator/create-react-app/issues/637
-export const appDirectory = fs.realpathSync(process.cwd());
+export const appDirectory = realpathSync(process.cwd());
 export const resolveApp = function(relativePath: string) {
   return path.resolve(appDirectory, relativePath);
 };

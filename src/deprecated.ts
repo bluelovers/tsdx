@@ -1,4 +1,4 @@
-import * as fs from 'fs-extra';
+import { copy, pathExists, remove } from 'fs-extra';
 
 import { paths } from './constants';
 
@@ -13,8 +13,8 @@ import { paths } from './constants';
 export async function moveTypes() {
   const appDistSrc = paths.appDist + '/src';
 
-  const pathExists = await fs.pathExists(appDistSrc);
-  if (!pathExists) return;
+  const _pathExists = await pathExists(appDistSrc);
+  if (!_pathExists) return;
 
   // see note above about deprecation window
   console.warn(
@@ -27,8 +27,8 @@ export async function moveTypes() {
   );
 
   // Move the type declarations to the base of the ./dist folder
-  await fs.copy(appDistSrc, paths.appDist, {
+  await copy(appDistSrc, paths.appDist, {
     overwrite: true,
   });
-  await fs.remove(appDistSrc);
+  await remove(appDistSrc);
 }
