@@ -86,6 +86,10 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
         },
         {
           name: '@babel/plugin-transform-typescript',
+          /**
+           * @see https://babeljs.io/docs/en/babel-plugin-transform-typescript#optimizeconstenums
+           */
+          optimizeConstEnums: true,
         },
         isTruthy(customOptions.extractErrors) && {
           name: './errors/transformErrorMessages',
