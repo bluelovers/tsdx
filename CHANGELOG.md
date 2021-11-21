@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.0.2...@bluelovers/tsdx@1.1.1) (2021-11-21)
+
+
+### ✨　Features
+
+* **cli:** Run DTS Bundle Generator ([eab3950](https://github.com/bluelovers/tsdx/commit/eab3950ff47c4b4b3edfbac18df94c1a02721e27))
+
+
+
+
+
 ## [1.0.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.0.1...@bluelovers/tsdx@1.0.2) (2021-11-21)
 
 
