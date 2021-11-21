@@ -50,7 +50,7 @@ import { composePackageJson } from './templates/utils';
 import * as deprecated from './deprecated';
 import { resolvePackage } from '@yarn-tool/resolve-package';
 import { resolve } from 'path';
-import { firstPackageBin } from '@yarn-tool/get-pkg-bin/util';
+import { firstPackageBin, getPackageBins } from '@yarn-tool/get-pkg-bin/util';
 const pkg = require('../package.json');
 
 const prog = sade('tsdx');
@@ -641,7 +641,7 @@ prog
     }) =>
     {
       const _r = resolvePackage('dts-bundle-generator');
-      const _bin = resolve(_r.pkgRoot, firstPackageBin(_r.pkg));
+      const _bin = resolve(_r.pkgRoot, firstPackageBin(getPackageBins(_r.pkg)));
 
       return execa('node', [
         _bin,
