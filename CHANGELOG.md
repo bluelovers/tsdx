@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.1...@bluelovers/tsdx@1.1.2) (2021-11-21)
+
+
+### 🐛　Bug Fixes
+
+* get bin path ([cd2756c](https://github.com/bluelovers/tsdx/commit/cd2756ca7e1aca453676373f1e2e831e629aff0b))
+
+
+
+
+
 ## [1.1.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.0.2...@bluelovers/tsdx@1.1.1) (2021-11-21)
 
 
