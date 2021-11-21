@@ -1,6 +1,6 @@
 {
   "name": "@bluelovers/tsdx",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Zero-config TypeScript package development",
   "keywords": [
     "react",
@@ -73,7 +73,9 @@
     "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "@yarn-tool/get-pkg-bin": "^1.0.40",
     "@yarn-tool/require-resolve": "^1.0.5",
+    "@yarn-tool/resolve-package": "^1.0.37",
     "ansi-escapes": "< 5 >=4",
     "asyncro": "^3.0.0",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
@@ -84,7 +86,7 @@
     "babel-plugin-transform-rename-import": "^2.3.0",
     "camelcase": "^6.2.1",
     "chalk": "^4.1.2",
-    "dts-bundle-generator": "^6.0.0",
+    "dts-bundle-generator": "github:bluelovers/dts-bundle-generator#npm-module",
     "enquirer": "^2.3.6",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",

@@ -48,6 +48,9 @@ import { createProgressEstimator } from './createProgressEstimator';
 import { templates } from './templates';
 import { composePackageJson } from './templates/utils';
 import * as deprecated from './deprecated';
+import { resolvePackage } from '@yarn-tool/resolve-package';
+import { resolve } from 'path';
+import { firstPackageBin } from '@yarn-tool/get-pkg-bin/util';
 const pkg = require('../package.json');
 
 const prog = sade('tsdx');
@@ -624,6 +627,28 @@ prog
       if (report.warningCount > opts['max-warnings']) {
         process.exit(1);
       }
+    }
+  );
+
+prog
+  .command('dts')
+  .describe('Run DTS Bundle Generator')
+  .option('-o', 'File name of generated d.ts')
+  .action(
+    async (opts: {
+      o: string;
+      _: string[];
+    }) =>
+    {
+      const _r = resolvePackage('dts-bundle-generator');
+      const _bin = resolve(_r.pkgRoot, firstPackageBin(_r.pkg));
+
+      return execa('node', [
+        _bin,
+        '-o',
+        opts.o ?? _r.pkg.types ?? _r.pkg.typings ?? 'dist/index.d.ts',
+       opts._?.[0] ?? 'src/index.ts',
+      ])
     }
   );
 

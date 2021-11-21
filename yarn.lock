@@ -1762,6 +1762,16 @@
     global-dirs "^3.0.0"
     tslib "^2.3.1"
 
+"@yarn-tool/get-pkg-bin@^1.0.40":
+  version "1.0.40"
+  resolved "https://registry.npmjs.org/@yarn-tool/get-pkg-bin/-/get-pkg-bin-1.0.40.tgz#819119042a36b03768f9861c8ad96fc0857469a1"
+  integrity sha512-3ZH3oihpzSYlXPPduhdRwg82XYeiYtu8lxN7WhV4urHowUr6tP3mOGp6dxr0qaS7UGLvLqohxW8T6JY45WmBpQ==
+  dependencies:
+    "@ts-type/package-dts" "^1.0.51"
+    "@yarn-tool/resolve-package" "^1.0.37"
+    tslib "^2.3.1"
+    upath2 "^3.1.10"
+
 "@yarn-tool/require-resolve@^1.0.5":
   version "1.0.5"
   resolved "https://registry.npmjs.org/@yarn-tool/require-resolve/-/require-resolve-1.0.5.tgz#597212dfc7923908fd32eecac65a0938dafcf217"
@@ -1771,7 +1781,7 @@
     global-dirs "^3.0.0"
     tslib "^2.3.1"
 
-"@yarn-tool/resolve-package@^1.0.36":
+"@yarn-tool/resolve-package@^1.0.36", "@yarn-tool/resolve-package@^1.0.37":
   version "1.0.37"
   resolved "https://registry.npmjs.org/@yarn-tool/resolve-package/-/resolve-package-1.0.37.tgz#9837ec2eba3a30e914600858c439de25baedacb7"
   integrity sha512-TnjsNfRmKbg/nWxULBrEkSE6+hmKAURRObfC92n4zZPxrJaDsuTjFtblkTz2ck3VPCcv8UC/Fp6HOGDjm3YRpg==
@@ -3089,11 +3099,11 @@ dot-prop@^6.0.1:
   dependencies:
     is-obj "^2.0.0"
 
-dts-bundle-generator@^6.0.0:
+"dts-bundle-generator@github:bluelovers/dts-bundle-generator#npm-module":
   version "6.0.0"
-  resolved "https://registry.npmjs.org/dts-bundle-generator/-/dts-bundle-generator-6.0.0.tgz#8f745b8c398c8204e1a77a628458c2e4fe68308d"
-  integrity sha512-lbBpqiFjnbl2K7RDwr1JKEraAT8k5BOmZioKVXvz8ksE96+ziQY3/lZNfoCIp77OHQ0HmQzoMqx7ULAUiDQawg==
+  resolved "https://codeload.github.com/bluelovers/dts-bundle-generator/tar.gz/2d724ed8a70fea6875699553ebc9173546e6a2e7"
   dependencies:
+    tslib "^2.3.1"
     typescript ">=3.0.1"
     yargs "^17.2.1"
 
