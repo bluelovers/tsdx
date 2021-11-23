@@ -1,5 +1,5 @@
 import { RollupOptions, OutputOptions } from 'rollup';
-import * as fs from 'fs-extra';
+import { existsSync } from 'fs-extra';
 import { concatAllArray } from 'jpjs';
 
 import { paths } from './constants';
@@ -14,7 +14,7 @@ let tsdxConfig = {
   },
 };
 
-if (fs.existsSync(paths.appConfig)) {
+if (existsSync(paths.appConfig)) {
   tsdxConfig = require(paths.appConfig);
 }
 
