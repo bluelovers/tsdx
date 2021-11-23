@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.2...@bluelovers/tsdx@1.1.3) (2021-11-23)
+
+
+### 🐛　Bug Fixes
+
+* https://github.com/bluelovers/tsdx/issues/2 ([d2c3ff1](https://github.com/bluelovers/tsdx/commit/d2c3ff1405331c801a9f77508604f0b0a27e7752))
+* **cli:** fix bug of tsdx dts and better message ([fd4577c](https://github.com/bluelovers/tsdx/commit/fd4577c1d0381ee2c564af3b90b978458e08b06a))
+
+
+### 📦　Code Refactoring
+
+* update import ([5a95f09](https://github.com/bluelovers/tsdx/commit/5a95f097b2b5c449377e8d0a1926839cbbdcab59))
+
+
+
+
+
 ## [1.1.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.1...@bluelovers/tsdx@1.1.2) (2021-11-21)
 
 
