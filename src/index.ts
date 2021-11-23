@@ -51,6 +51,7 @@ import * as deprecated from './deprecated';
 import { resolvePackage } from '@yarn-tool/resolve-package';
 import { resolve } from 'path';
 import { firstPackageBin, getPackageBins } from '@yarn-tool/get-pkg-bin/util';
+import { readJSONSync } from 'fs-extra';
 const pkg = require('../package.json');
 
 const prog = sade('tsdx');
@@ -640,15 +641,31 @@ prog
       _: string[];
     }) =>
     {
+      console.log('Run DTS Bundle Generator');
+
       const _r = resolvePackage('dts-bundle-generator');
+      const appPackageJson = readJSONSync(paths.appPackageJson);
       const _bin = resolve(_r.pkgRoot, firstPackageBin(getPackageBins(_r.pkg)));
 
-      return execa('node', [
+      const outputFile = opts.o ?? appPackageJson.types ?? appPackageJson.typings ?? 'dist/index.d.ts';
+      const inputFile = opts._?.[0] ?? 'src/index.ts';
+
+      console.log(`Input: ${inputFile}\nOutput: ${outputFile}`);
+
+      const logger = await createProgressEstimator();
+
+      let p = execa('node', [
         _bin,
         '-o',
-        opts.o ?? _r.pkg.types ?? _r.pkg.typings ?? 'dist/index.d.ts',
-       opts._?.[0] ?? 'src/index.ts',
-      ])
+        outputFile,
+       inputFile,
+      ], {
+        stdio: 'pipe',
+      });
+
+      await logger(p, `Creating DTS Bundle`);
+
+      return
     }
   );
 
