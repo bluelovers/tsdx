@@ -18,6 +18,9 @@ import cleanup from 'rollup-plugin-cleanup';
 import { extractErrors } from './errors/extractErrors';
 import { babelPluginTsdx } from './babelPluginTsdx';
 import { TsdxOptions } from './types';
+import { getCurrentTsconfig } from 'get-current-tsconfig';
+import findTsconfig from '@yarn-tool/find-tsconfig';
+import { pathExistsSync } from 'fs-extra';
 
 const errorCodeOpts = {
   errorMapFilePath: paths.appErrorsJson,
@@ -48,9 +51,16 @@ export async function createRollupConfig(
     .filter(Boolean)
     .join('.');
 
-  const tsconfigPath = opts.tsconfig || paths.tsconfigJson;
+  const tsconfigPath = opts.tsconfig || findTsconfig( paths.appRoot) || paths.tsconfigJson;
+
+  if (opts.tsconfig && !pathExistsSync(tsconfigPath))
+  {
+    throw new Error('Target tsconfig does not exist: ' + tsconfigPath);
+  }
+
   // borrowed from https://github.com/facebook/create-react-app/pull/7248
-  const tsconfigJSON = ts.readConfigFile(tsconfigPath, ts.sys.readFile).config;
+  //const tsconfigJSON = ts.readConfigFile(tsconfigPath, ts.sys.readFile).config;
+  const tsconfigJSON = getCurrentTsconfig(paths.appRoot, null, tsconfigPath);
   // borrowed from https://github.com/ezolenko/rollup-plugin-typescript2/blob/42173460541b0c444326bf14f2c8c27269c4cb11/src/parse-tsconfig.ts#L48
   const tsCompilerOptions = ts.parseJsonConfigFileContent(
     tsconfigJSON,
@@ -129,6 +139,8 @@ export async function createRollupConfig(
           opts.format === 'umd'
             ? /\/node_modules\//
             : /\/regenerator-runtime\//,
+        // @ts-ignore
+        defaultIsModuleExports: false,
       }),
       json(),
       {
