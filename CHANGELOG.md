@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.3...@bluelovers/tsdx@1.1.4) (2021-11-23)
+
+
+### ✨　Features
+
+* **cli:** support more dts-bundle-generator cli options ([1dba65a](https://github.com/bluelovers/tsdx/commit/1dba65af5901e0e529d81a78f8b5da90c540bda7))
+
+
+
+
+
 ## [1.1.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.2...@bluelovers/tsdx@1.1.3) (2021-11-23)
 
 
