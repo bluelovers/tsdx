@@ -46,7 +46,7 @@ export async function createRollupConfig(
     opts.format,
     opts.env,
     shouldMinify ? 'min' : '',
-    'js',
+    opts.format === 'esm' ? 'mjs' :'cjs',
   ]
     .filter(Boolean)
     .join('.');

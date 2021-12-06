@@ -16,9 +16,9 @@ const basicTemplate: Template = {
     version: '1.0.0',
     license: 'MIT',
     // author: author,
-    main: 'dist/index.js',
-    // module: `dist/${safeName}.esm.js`,
-    module: `dist/index.esm.js`,
+    main: 'dist/index.cjs',
+    // module: `dist/${safeName}.esm.mjs`,
+    module: `dist/index.esm.mjs`,
     typings: `dist/index.d.ts`,
     "files": [
       "tsconfig.json",
@@ -70,7 +70,7 @@ const basicTemplate: Template = {
         limit: '10 KB',
       },
       {
-        path: `dist/${safeName}.esm.js`,
+        path: `dist/${safeName}.esm.mjs`,
         limit: '10 KB',
       },
     ],

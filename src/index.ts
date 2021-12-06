@@ -459,12 +459,12 @@ function writeCjsEntryFile(name: string) {
 'use strict'
 
 if (process.env.NODE_ENV === 'production') {
-  ${baseLine}.cjs.production.min.js')
+  ${baseLine}.cjs.production.min.cjs')
 } else {
-  ${baseLine}.cjs.development.js')
+  ${baseLine}.cjs.development.cjs')
 }
 `;
-  return fs.outputFile(path.join(paths.appDist, 'index.js'), contents);
+  return fs.outputFile(path.join(paths.appDist, 'index.cjs'), contents);
 }
 
 function getAuthorName() {
