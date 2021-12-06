@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.4...@bluelovers/tsdx@2.0.1) (2021-12-06)
+
+
+### 📦　Code Refactoring
+
+* change ext to cjs mjs ([0a03787](https://github.com/bluelovers/tsdx/commit/0a03787a1e8d9325da9db136ad12e7896d24587c))
+
+
+### BREAKING CHANGE
+
+* change ext to cjs mjs
+
+
+
+
+
 ## [1.1.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.3...@bluelovers/tsdx@1.1.4) (2021-11-23)
 
 
