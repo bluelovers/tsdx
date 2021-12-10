@@ -1,3 +1,6 @@
+import { EnumFormat } from './const';
+import { ITSTypeAndStringLiteral } from 'ts-type/lib/helper/string';
+
 interface SharedOpts {
   // JS target
   target: 'node' | 'browser';
@@ -5,9 +8,10 @@ interface SharedOpts {
   tsconfig?: string;
   // Is error extraction running?
   extractErrors?: boolean;
+  esmMinify: boolean;
 }
 
-export type ModuleFormat = 'cjs' | 'umd' | 'esm' | 'system';
+export type ModuleFormat = ITSTypeAndStringLiteral<EnumFormat>;
 
 export interface BuildOpts extends SharedOpts {
   name?: string;
@@ -30,6 +34,7 @@ export interface NormalizedOpts
   name: string;
   input: string[];
   format: [ModuleFormat, ...ModuleFormat[]];
+  esmMinify: boolean;
 }
 
 export interface TsdxOptions extends SharedOpts {
