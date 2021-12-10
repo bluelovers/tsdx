@@ -16,7 +16,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-    "target": "es2017",
+    "target": "ES2019",
+    "preserveConstEnums": true,
     "newLine": "lf"
   }
 }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.0.1...@bluelovers/tsdx@2.1.1) (2021-12-10)
+
+
+### ✨　Features
+
+* support minify esm ([4e059ac](https://github.com/bluelovers/tsdx/commit/4e059ac6530e5f5a2c9e3e4df15606e8f02fc412))
+
+
+
+
+
 ## [2.0.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@1.1.4...@bluelovers/tsdx@2.0.1) (2021-12-06)
 
 

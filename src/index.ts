@@ -52,6 +52,7 @@ import { resolvePackage } from '@yarn-tool/resolve-package';
 import { resolve } from 'path';
 import { firstPackageBin, getPackageBins } from '@yarn-tool/get-pkg-bin/util';
 import { readJSONSync } from 'fs-extra';
+import { EnumFormat } from './const';
 const pkg = require('../package.json');
 
 const prog = sade('tsdx');
@@ -388,7 +389,7 @@ prog
   .option('--target', 'Specify your target environment', 'node')
   .example('build --target node')
   .example('build --target browser')
-  .option('--name', 'Specify name exposed in UMD builds')
+  .option('--name', 'Specify name exposed in UMD builds', 'index')
   .example('build --name Foo')
   .option('--format', 'Specify module format(s)', 'cjs,esm')
   .example('build --format cjs,esm')
@@ -396,6 +397,8 @@ prog
   .example('build --tsconfig ./tsconfig.foo.json')
   .option('--transpileOnly', 'Skip type checking')
   .example('build --transpileOnly')
+  .option('--esmMinify', 'Minify esm')
+  .example('build --esmMinify')
   .option(
     '--extractErrors',
     'Extract errors to ./errors/codes.json and provide a url for decoding.'
@@ -442,10 +445,11 @@ async function normalizeOpts(opts: WatchOpts): Promise<NormalizedOpts> {
     input: await getInputs(opts.entry, appPackageJson.source),
     format: opts.format.split(',').map((format: string) => {
       if (format === 'es') {
-        return 'esm';
+        return EnumFormat.esm;
       }
       return format;
     }) as [ModuleFormat, ...ModuleFormat[]],
+    esmMinify: opts.esmMinify,
   };
 }
 
