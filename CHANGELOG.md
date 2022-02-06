@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.1...@bluelovers/tsdx@2.1.2) (2022-02-06)
+
+
+### ✨　Features
+
+* support `dts build --noClean` (fixes [#103](https://github.com/bluelovers/tsdx/issues/103)) ([#105](https://github.com/bluelovers/tsdx/issues/105)) ([e059099](https://github.com/bluelovers/tsdx/commit/e059099c59502c6c454ec917dc2f9de79db29f68))
+
+
+### 🔖　Miscellaneous
+
+* . ([71d414a](https://github.com/bluelovers/tsdx/commit/71d414aaabb42cd4be6cd5375d56a7e6035a90fd))
+
+
+
+
+
 ## [2.1.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.0.1...@bluelovers/tsdx@2.1.1) (2021-12-10)
 
 
