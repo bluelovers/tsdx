@@ -260,6 +260,8 @@ export async function createRollupConfig(
           toplevel: opts.format === 'cjs',
           warnings: true,
           keep_classnames: true,
+          keep_fnames: true,
+          keep_infinity: true,
         }),
     ],
   };
