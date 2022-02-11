@@ -466,7 +466,7 @@ function writeCjsEntryFile(name: string) {
   const contents = `
 'use strict'
 
-if (process.env.NODE_ENV === 'production') {
+if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production') {
   ${baseLine}.cjs.production.min.cjs')
 } else {
   ${baseLine}.cjs.development.cjs')
