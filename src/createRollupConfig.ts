@@ -261,7 +261,6 @@ export async function createRollupConfig(
           warnings: true,
           keep_classnames: true,
           keep_fnames: true,
-          keep_infinity: true,
         }),
     ],
   };
