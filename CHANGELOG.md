@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.2...@bluelovers/tsdx@2.1.3) (2022-02-11)
+
+
+### 🐛　Bug Fixes
+
+* (terser plugin) DefaultsError: `keep_infinity` is not a supported option ([26e333b](https://github.com/bluelovers/tsdx/commit/26e333b78cf2135bc551bd1437ae2b1f2222d54e))
+
+
+### 🔖　Miscellaneous
+
+* . ([69e7d9c](https://github.com/bluelovers/tsdx/commit/69e7d9c9524318799281f706c7d7fa801bb42df0))
+
+
+
+
+
 ## [2.1.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.1...@bluelovers/tsdx@2.1.2) (2022-02-06)
 
 
