@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.3...@bluelovers/tsdx@2.1.4) (2022-02-20)
+
+
+### ✨　Features
+
+* build `umd` by default ([8f26d4c](https://github.com/bluelovers/tsdx/commit/8f26d4c58fcf859b8102611cda8f25fd84ed2ab8))
+
+
+
+
+
 ## [2.1.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.2...@bluelovers/tsdx@2.1.3) (2022-02-11)
 
 
