@@ -391,7 +391,7 @@ prog
   .example('build --target browser')
   .option('--name', 'Specify name exposed in UMD builds', 'index')
   .example('build --name Foo')
-  .option('--format', 'Specify module format(s)', 'cjs,esm')
+  .option('--format', 'Specify module format(s)', 'cjs,esm,umd')
   .example('build --format cjs,esm')
   .option('--noClean', "Don't clean the dist folder")
   .example('build --noClean')
