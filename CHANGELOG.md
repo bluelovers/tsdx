@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.6](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.5...@bluelovers/tsdx@2.1.6) (2022-04-11)
+
+
+### ✨　Features
+
+* **opts:** use `objectGuards` ([26188b2](https://github.com/bluelovers/tsdx/commit/26188b2dd640b0baac75455055882ba4832ca06e))
+
+
+
+
+
 ## [2.1.5](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.4...@bluelovers/tsdx@2.1.5) (2022-04-11)
 
 
