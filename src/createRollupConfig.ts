@@ -241,6 +241,7 @@ export async function createRollupConfig(
       opts.env !== undefined &&
         replace({
           preventAssignment: false,
+          objectGuards: true,
           values: {
             'process.env.NODE_ENV': JSON.stringify(opts.env),
           },
