@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.4...@bluelovers/tsdx@2.1.5) (2022-04-11)
+
+
+### ✨　Features
+
+* **opts:** split `name` and `outputName` , update rollup config ([4e47065](https://github.com/bluelovers/tsdx/commit/4e470657bc62c9dcc155bf60ac7840be4b9067d8))
+
+
+
+
+
 ## [2.1.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.3...@bluelovers/tsdx@2.1.4) (2022-02-20)
 
 
