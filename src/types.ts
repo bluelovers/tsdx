@@ -15,6 +15,7 @@ export type ModuleFormat = ITSTypeAndStringLiteral<EnumFormat>;
 
 export interface BuildOpts extends SharedOpts {
   name?: string;
+  outputName?: string;
   entry?: string | string[];
   format: 'cjs,esm';
   target: 'browser';
@@ -40,6 +41,7 @@ export interface NormalizedOpts
 export interface TsdxOptions extends SharedOpts {
   // Name of package
   name: string;
+  outputName: string;
   // path to file
   input: string;
   // Environment

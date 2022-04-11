@@ -54,6 +54,7 @@ import { firstPackageBin, getPackageBins } from '@yarn-tool/get-pkg-bin/util';
 import { readJSONSync } from 'fs-extra';
 import { EnumFormat } from './const';
 const pkg = require('../package.json');
+import Table from 'cli-table3';
 
 const prog = sade('tsdx');
 
@@ -389,8 +390,10 @@ prog
   .option('--target', 'Specify your target environment', 'node')
   .example('build --target node')
   .example('build --target browser')
-  .option('--name', 'Specify name exposed in UMD builds', 'index')
+  .option('--name', 'Specify name exposed in UMD builds')
   .example('build --name Foo')
+  .option('--outputName', 'Specify name of output file', 'index')
+  .example('build --outputName index')
   .option('--format', 'Specify module format(s)', 'cjs,esm,umd')
   .example('build --format cjs,esm')
   .option('--noClean', "Don't clean the dist folder")
@@ -410,14 +413,18 @@ prog
   )
   .action(async (dirtyOpts: BuildOpts) => {
     const opts = await normalizeOpts(dirtyOpts);
+
+    printOptsTable(opts);
+
     const buildConfigs = await createBuildConfigs(opts);
     if (!opts.noClean) {
       await cleanDistFolder();
     }
+
     const logger = await createProgressEstimator();
     if (opts.format.includes('cjs')) {
       const promise = writeCjsEntryFile(opts.name).catch(logError);
-      logger(promise, 'Creating entry file');
+      logger(promise, 'Creating CJS entry file');
     }
     try {
       const promise = asyncro
@@ -445,7 +452,8 @@ prog
 async function normalizeOpts(opts: WatchOpts): Promise<NormalizedOpts> {
   return {
     ...opts,
-    name: opts.name || 'index' || appPackageJson.name,
+    name: opts.name || appPackageJson.name,
+    outputName: opts.outputName || 'index',
     input: await getInputs(opts.entry, appPackageJson.source),
     format: opts.format.split(',').map((format: string) => {
       if (format === 'es') {
@@ -455,6 +463,45 @@ async function normalizeOpts(opts: WatchOpts): Promise<NormalizedOpts> {
     }) as [ModuleFormat, ...ModuleFormat[]],
     esmMinify: opts.esmMinify,
   };
+}
+
+function printOptsTable<T extends NormalizedOpts>(opts: T)
+{
+  const table = new Table({
+    colAligns: ['right', 'left'],
+    chars: {
+      //top: '',
+      'top-mid': '',
+      'top-left': '',
+      'top-right': '',
+      //bottom: '',
+      'bottom-mid': '',
+      'bottom-left': '',
+      'bottom-right': '',
+      left: '',
+      'left-mid': '',
+      mid: '',
+      'mid-mid': '',
+      right: '',
+      'right-mid': '',
+      middle: '',
+    },
+  });
+
+  table.push([pkg.name, pkg.version]);
+  table.push(['process.versions.node', process.versions.node]);
+  table.push(['']);
+
+  for (let key in opts)
+  {
+    const value = opts[key];
+    if (key === '_' || typeof value === 'undefined') continue;
+
+    table.push([key, String(value)]);
+  }
+
+  console.log(table.toString());
+  console.log('');
 }
 
 async function cleanDistFolder() {
@@ -529,6 +576,7 @@ prog
         opts.config ? path.dirname(opts.config) : paths.appRoot
       ),
       ...appPackageJson.jest,
+      passWithNoTests: true,
     };
 
     // Allow overriding with jest.config

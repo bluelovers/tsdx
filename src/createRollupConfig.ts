@@ -38,15 +38,18 @@ export async function createRollupConfig(
     ...opts,
   });
 
+  const isEsm = opts.format === 'esm';
+
   const shouldMinify =
-    opts.minify !== undefined ? opts.minify : opts.env === 'production';
+    opts.minify !== undefined ? opts.minify : opts.env === 'production' || isEsm;
 
   const outputName = [
-    `${paths.appDist}/${safePackageName(opts.name)}`,
+    //`${paths.appDist}/${safePackageName(opts.name)}`,
+    `${paths.appDist}/${safePackageName(opts.outputName || opts.name)}`,
     opts.format,
     opts.env,
-    shouldMinify ? 'min' : '',
-    opts.format === 'esm' ? 'mjs' :'cjs',
+    shouldMinify && (opts.esmMinify || !isEsm) ? 'min' : '',
+    isEsm ? 'mjs' :'cjs',
   ]
     .filter(Boolean)
     .join('.');
@@ -114,7 +117,12 @@ export async function createRollupConfig(
       esModule: Boolean(tsCompilerOptions?.esModuleInterop),
       name: opts.name || safeVariableName(opts.name),
       sourcemap: true,
-      globals: { react: 'React', 'react-native': 'ReactNative' },
+      globals: {
+        react: 'React',
+        'react-native': 'ReactNative',
+        'lodash-es': 'lodashEs',
+        'lodash/fp': 'lodashFp',
+      },
       exports: 'named',
     },
     plugins: [
@@ -130,7 +138,7 @@ export async function createRollupConfig(
           'main',
           opts.target !== 'node' ? 'browser' : undefined,
         ].filter(Boolean) as string[],
-        extensions: [...RESOLVE_DEFAULTS.extensions, '.jsx'],
+        extensions: [...RESOLVE_DEFAULTS.extensions, ...(isEsm ? ['.mjs', '.cjs'] : ['.cjs', '.mjs']), '.jsx'],
       }),
       // all bundled external modules need to be converted from CJS to ESM
       commonjs({
@@ -232,7 +240,10 @@ export async function createRollupConfig(
       }),
       opts.env !== undefined &&
         replace({
-          'process.env.NODE_ENV': JSON.stringify(opts.env),
+          preventAssignment: false,
+          values: {
+            'process.env.NODE_ENV': JSON.stringify(opts.env),
+          },
         }),
       /*
       cleanup({
@@ -246,7 +257,13 @@ export async function createRollupConfig(
       shouldMinify &&
         terser({
           //sourcemap: true,
-          output: { comments: false },
+          output: {
+            comments: false,
+            beautify: isEsm,
+            indent_level: 2,
+            keep_numbers: true,
+            preserve_annotations: true,
+          },
           compress: {
             keep_infinity: true,
             pure_getters: true,
