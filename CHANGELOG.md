@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.6...@bluelovers/tsdx@2.2.1) (2022-05-22)
+
+
+### ♻️　Chores
+
+* **deps:** use jest 28 ([28e4dcd](https://github.com/bluelovers/tsdx/commit/28e4dcd117f1800ef5da62d6721b0a646a2fab8f))
+
+
+
+
+
 ## [2.1.6](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.5...@bluelovers/tsdx@2.1.6) (2022-04-11)
 
 
