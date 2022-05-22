@@ -75,17 +75,6 @@ const basicTemplate: Template = {
       },
     ],
     */
-    husky: {
-      hooks: {
-        'pre-commit': 'tsdx lint',
-      },
-    },
-    prettier: {
-      printWidth: 80,
-      semi: true,
-      singleQuote: true,
-      trailingComma: 'es5',
-    },
   },
 };
 
