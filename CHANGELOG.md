@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.1...@bluelovers/tsdx@2.2.2) (2022-06-06)
+
+
+### 🐛　Bug Fixes
+
+* 修正 `writeCjsEntryFile` 沒有優先使用 `outputName` 的問題 ([d0dd427](https://github.com/bluelovers/tsdx/commit/d0dd427681089c22fb084486d5f27fd342aee27e))
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([497b439](https://github.com/bluelovers/tsdx/commit/497b439f784ca122d9d54381246a7bfa7df9dcb9))
+
+
+
+
+
 ## [2.2.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.1.6...@bluelovers/tsdx@2.2.1) (2022-05-22)
 
 
