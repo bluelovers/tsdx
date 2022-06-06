@@ -282,6 +282,8 @@ prog
   .example('watch --target node')
   .option('--name', 'Specify name exposed in UMD builds')
   .example('watch --name Foo')
+  .option('--outputName', 'Specify name of output file', 'index')
+  .example('build --outputName index')
   .option('--format', 'Specify module format(s)', 'cjs,esm')
   .example('watch --format cjs,esm')
   .option(
@@ -310,7 +312,7 @@ prog
       await cleanDistFolder();
     }
     if (opts.format.includes('cjs')) {
-      await writeCjsEntryFile(opts.name);
+      await writeCjsEntryFile(opts.outputName || opts.name);
     }
 
     type Killer = execa.ExecaChildProcess | null;
@@ -423,7 +425,7 @@ prog
 
     const logger = await createProgressEstimator();
     if (opts.format.includes('cjs')) {
-      const promise = writeCjsEntryFile(opts.name).catch(logError);
+      const promise = writeCjsEntryFile(opts.outputName || opts.name).catch(logError);
       logger(promise, 'Creating CJS entry file');
     }
     try {
