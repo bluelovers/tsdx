@@ -115,7 +115,7 @@ export async function createRollupConfig(
       freeze: false,
       // Respect tsconfig esModuleInterop when setting __esModule.
       esModule: Boolean(tsCompilerOptions?.esModuleInterop),
-      name: opts.name || safeVariableName(opts.name),
+      name: safeVariableName(opts.name),
       sourcemap: true,
       globals: {
         react: 'React',
