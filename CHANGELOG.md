@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.3...@bluelovers/tsdx@2.2.4) (2022-06-23)
+
+
+### 🐛　Bug Fixes
+
+* check entry file exists ([3f529ac](https://github.com/bluelovers/tsdx/commit/3f529ac7ab2e64ed7faa991cc9526182397bb869))
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([59cf170](https://github.com/bluelovers/tsdx/commit/59cf1706ab674778c255b56a94c52b7b314f767f))
+
+
+
+
+
 ## [2.2.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.2...@bluelovers/tsdx@2.2.3) (2022-06-09)
 
 **Note:** Version bump only for package @bluelovers/tsdx
