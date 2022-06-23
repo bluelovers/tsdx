@@ -51,7 +51,7 @@ import * as deprecated from './deprecated';
 import { resolvePackage } from '@yarn-tool/resolve-package';
 import { resolve } from 'path';
 import { firstPackageBin, getPackageBins } from '@yarn-tool/get-pkg-bin/util';
-import { readJSONSync } from 'fs-extra';
+import { pathExists, readJSONSync } from 'fs-extra';
 import { EnumFormat } from './const';
 const pkg = require('../package.json');
 import Table from 'cli-table3';
@@ -81,6 +81,10 @@ async function jsOrTs(filename: string) {
     ? '.ts'
     : (await isFile(resolveApp(filename + '.tsx')))
     ? '.tsx'
+    : (await isFile(resolveApp(filename + '.mts')))
+    ? '.mts'
+    : (await isFile(resolveApp(filename + '.cts')))
+    ? '.cts'
     : (await isFile(resolveApp(filename + '.jsx')))
     ? '.jsx'
     : '.js';
@@ -417,6 +421,16 @@ prog
     const opts = await normalizeOpts(dirtyOpts);
 
     printOptsTable(opts);
+
+    for (const input of [opts.input].flat())
+    {
+      await pathExists(input).then(bool => {
+        if (!bool)
+        {
+          throw new Error(`entry file not exists: ${input}`);
+        }
+      })
+    }
 
     const buildConfigs = await createBuildConfigs(opts);
     if (!opts.noClean) {
