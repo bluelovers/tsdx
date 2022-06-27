@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.5](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.4...@bluelovers/tsdx@2.2.5) (2022-06-27)
+
+
+### ✨　Features
+
+* not allow set name = 'index' ([aed6cef](https://github.com/bluelovers/tsdx/commit/aed6cef36b1783c22113bf558107730f9a7d6596))
+
+
+
+
+
 ## [2.2.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.3...@bluelovers/tsdx@2.2.4) (2022-06-23)
 
 
