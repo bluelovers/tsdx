@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.6](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.5...@bluelovers/tsdx@2.2.6) (2022-07-29)
+
+
+### 🔖　Miscellaneous
+
+* . ([4fc751d](https://github.com/bluelovers/tsdx/commit/4fc751d8b7df42dfdb5f56e7d29b222a7b999b4d))
+
+
+
+
+
 ## [2.2.5](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.4...@bluelovers/tsdx@2.2.5) (2022-06-27)
 
 
