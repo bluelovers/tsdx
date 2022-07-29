@@ -19,7 +19,7 @@ import { extractErrors } from './errors/extractErrors';
 import { babelPluginTsdx } from './babelPluginTsdx';
 import { TsdxOptions } from './types';
 import { getCurrentTsconfig } from 'get-current-tsconfig';
-import findTsconfig from '@yarn-tool/find-tsconfig';
+import { findTsconfig } from '@yarn-tool/find-tsconfig';
 import { pathExistsSync } from 'fs-extra';
 
 const errorCodeOpts = {
@@ -138,7 +138,13 @@ export async function createRollupConfig(
           'main',
           opts.target !== 'node' ? 'browser' : undefined,
         ].filter(Boolean) as string[],
-        extensions: [...RESOLVE_DEFAULTS.extensions, ...(isEsm ? ['.mjs', '.cjs'] : ['.cjs', '.mjs']), '.jsx'],
+        extensions: [
+          ...(isEsm ? ['.mjs', '.cjs'] : ['.cjs', '.mjs']),
+          ...RESOLVE_DEFAULTS.extensions,
+          '.jsx',
+          '.ts', '.tsx',
+          ...(isEsm ? ['.mts', '.cts'] : ['.cts', '.mts']),
+        ],
       }),
       // all bundled external modules need to be converted from CJS to ESM
       commonjs({
@@ -229,7 +235,13 @@ export async function createRollupConfig(
       }),
       babelPluginTsdx({
         exclude: 'node_modules/**',
-        extensions: [...DEFAULT_BABEL_EXTENSIONS, 'ts', 'tsx'],
+        extensions: [
+          '.js', '.jsx',
+          ...(isEsm ? ['.mjs', '.cjs'] : ['.cjs', '.mjs']),
+          ...DEFAULT_BABEL_EXTENSIONS,
+          '.ts', '.tsx',
+          ...(isEsm ? ['.mts', '.cts'] : ['.cts', '.mts']),
+        ],
         passPerPreset: true,
         custom: {
           targets: opts.target === 'node' ? { node: '12' } : undefined,
