@@ -60,7 +60,7 @@ prog
 		if (opts.format.includes(EnumFormat.cjs))
 		{
 			const promise = writeCjsEntryFile(opts.outputName || opts.name).catch(logError);
-			logger(promise, 'Creating CJS entry file');
+			await logger(promise, 'Creating CJS entry file');
 		}
 		try
 		{
@@ -81,8 +81,7 @@ prog
 				{
 					await moveTypes();
 				});
-			logger(promise, 'Building modules');
-			await promise;
+			await logger(promise, 'Building modules');
 		}
 		catch (error)
 		{
