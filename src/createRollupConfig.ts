@@ -21,6 +21,8 @@ import { TsdxOptions } from './types';
 import { getCurrentTsconfig } from 'get-current-tsconfig';
 import { findTsconfig } from '@yarn-tool/find-tsconfig';
 import { pathExistsSync } from 'fs-extra';
+import { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
+import { EnumFormat } from './const';
 
 const errorCodeOpts = {
   errorMapFilePath: paths.appErrorsJson,
@@ -38,7 +40,7 @@ export async function createRollupConfig(
     ...opts,
   });
 
-  const isEsm = opts.format === 'esm';
+  const isEsm = opts.format === EnumFormat.esm;
 
   const shouldMinify =
     opts.minify !== undefined ? opts.minify : opts.env === 'production' || isEsm;
@@ -49,7 +51,7 @@ export async function createRollupConfig(
     opts.format,
     opts.env,
     shouldMinify && (opts.esmMinify || !isEsm) ? 'min' : '',
-    isEsm ? 'mjs' :'cjs',
+    isEsm ? 'mjs' : EnumFormat.cjs,
   ]
     .filter(Boolean)
     .join('.');
@@ -249,7 +251,7 @@ export async function createRollupConfig(
           format: opts.format,
         },
         babelHelpers: 'bundled',
-      }),
+      } as RollupBabelInputPluginOptions),
       opts.env !== undefined &&
         replace({
           preventAssignment: false,
@@ -287,11 +289,11 @@ export async function createRollupConfig(
             conditionals: true,
           },
           ecma: 2019,
-          toplevel: opts.format === 'cjs',
+          toplevel: opts.format === EnumFormat.cjs,
           warnings: true,
           keep_classnames: true,
           keep_fnames: true,
-        }),
+        } as any),
     ],
-  };
+  } as RollupOptions;
 }

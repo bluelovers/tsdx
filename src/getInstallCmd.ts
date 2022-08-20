@@ -4,7 +4,7 @@ let cmd: InstallCommand;
 
 export type InstallCommand = 'yarn' | 'npm' | 'yarn-tool';
 
-export default async function getInstallCmd(): Promise<InstallCommand> {
+export async function getInstallCmd(): Promise<InstallCommand> {
   if (cmd) {
     return cmd;
   }
