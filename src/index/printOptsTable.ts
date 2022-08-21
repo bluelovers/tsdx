@@ -1,6 +1,7 @@
 import { NormalizedOpts } from '../types';
 import Table from 'cli-table3';
 import { pkg } from './_';
+import { inspect } from 'util';
 
 export function printOptsTable<T extends NormalizedOpts>(opts: T)
 {
@@ -34,7 +35,9 @@ export function printOptsTable<T extends NormalizedOpts>(opts: T)
 		const value = opts[key];
 		if (key === '_' || typeof value === 'undefined') continue;
 
-		table.push([key, String(value)]);
+		table.push([key, typeof value === 'string' ? value : inspect(value, {
+			colors: true,
+		})]);
 	}
 
 	console.log(table.toString());

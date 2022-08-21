@@ -33,7 +33,7 @@ export interface WatchOpts extends BuildOpts {
 export interface NormalizedOpts
   extends Omit<WatchOpts, 'name' | 'input' | 'format'> {
   name: string;
-  input: string[];
+  input: Record<ModuleFormat, string[]>;
   format: [ModuleFormat, ...ModuleFormat[]];
   esmMinify: boolean;
 }

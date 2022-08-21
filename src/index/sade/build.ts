@@ -6,11 +6,11 @@ import { createBuildConfigs } from '../../createBuildConfigs';
 import { cleanDistFolder } from '../cleanDistFolder';
 import { createProgressEstimator } from '../../createProgressEstimator';
 import { writeCjsEntryFile } from '../writeCjsEntryFile';
-import asyncro from 'asyncro';
+import { mapSeries } from 'bluebird';
 import { OutputOptions, rollup, RollupOptions } from 'rollup';
 import { moveTypes } from '../../deprecated';
 import { logError } from '../../logError';
-import { checkEntryExists } from '../checkEntryExists';
+import { assertCheckEntryExists } from '../checkEntryExists';
 import { EnumFormat } from '../../const';
 
 prog
@@ -48,7 +48,7 @@ prog
 
 		printOptsTable(opts);
 
-		await checkEntryExists(opts);
+		await assertCheckEntryExists(opts);
 
 		const buildConfigs = await createBuildConfigs(opts);
 		if (!opts.noClean)
@@ -64,23 +64,15 @@ prog
 		}
 		try
 		{
-			const promise = asyncro
-				.map(
+			const promise = mapSeries(
 					buildConfigs,
 					async (inputOptions: RollupOptions & { output: OutputOptions }) =>
 					{
-						let bundle = await rollup(inputOptions);
-						await bundle.write(inputOptions.output);
+						const bundle = await rollup(inputOptions);
+						return bundle.write(inputOptions.output);
 					}
 				)
-				.catch((e: any) =>
-				{
-					throw e;
-				})
-				.then(async () =>
-				{
-					await moveTypes();
-				});
+				.tap(moveTypes);
 			await logger(promise, 'Building modules');
 		}
 		catch (error)

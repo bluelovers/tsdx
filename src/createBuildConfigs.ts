@@ -1,12 +1,13 @@
 import { OutputOptions, RollupOptions } from 'rollup';
 import { existsSync } from 'fs-extra';
-import { concatAllArray } from 'jpjs';
 
 import { paths } from './constants';
 import { ModuleFormat, NormalizedOpts, TsdxOptions } from './types';
 
 import { createRollupConfig } from './createRollupConfig';
 import { EnumFormat } from './const';
+import { map } from 'bluebird';
+import { ITSTypeAndStringLiteral } from 'ts-type/lib/helper/string';
 
 // check for custom tsdx.config.js
 let tsdxConfig = {
@@ -21,10 +22,45 @@ if (existsSync(paths.appConfig))
 	tsdxConfig = require(paths.appConfig);
 }
 
+const allowFormat = [
+	EnumFormat.cjs,
+	EnumFormat.esm,
+	EnumFormat.umd,
+	EnumFormat.system,
+] as ITSTypeAndStringLiteral<EnumFormat>[];
+
+export function isAllowFormat(format: ITSTypeAndStringLiteral<EnumFormat>)
+{
+	return allowFormat.includes(format)
+}
+
+export function createBuildAllInputs(opts: NormalizedOpts)
+{
+	return opts.format.map(format => {
+		if (isAllowFormat(format))
+		{
+			const options = opts.input[format].map(input =>
+			{
+				return createFormats(format, opts, input) as TsdxOptions[]
+			}).flat();
+
+			options[0] = {
+				...options[0],
+				writeMeta: true,
+			};
+
+			return options;
+		}
+
+		return void 0
+	}).flat().filter(Boolean)
+}
+
 export async function createBuildConfigs(
 	opts: NormalizedOpts,
 ): Promise<Array<RollupOptions & { output: OutputOptions }>>
 {
+	/*
 	const allInputs = concatAllArray(
 		opts.input.map((input: string) =>
 			createAllFormats(opts, input).map(
@@ -37,15 +73,15 @@ export async function createBuildConfigs(
 			),
 		),
 	);
+	 */
+	const allInputs = createBuildAllInputs(opts);
 
-	return await Promise.all(
-		allInputs.map(async (options: TsdxOptions, index: number) =>
+	return map(allInputs, async (options: TsdxOptions, index: number) =>
 		{
 			// pass the full rollup config to tsdx.config.js override
 			const config = await createRollupConfig(options, index);
-			return tsdxConfig.rollup(config, options);
-		}),
-	);
+			return tsdxConfig.rollup(config, options) as any;
+		})
 }
 
 function createFormats(
@@ -81,6 +117,7 @@ function createFormats(
 	]
 }
 
+/*
 function createAllFormats(
 	opts: NormalizedOpts,
 	input: string,
@@ -97,3 +134,4 @@ function createAllFormats(
 		.filter(Boolean) as [TsdxOptions, ...TsdxOptions[]]
 		;
 }
+ */
