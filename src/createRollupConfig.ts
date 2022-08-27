@@ -157,6 +157,7 @@ export async function createRollupConfig(
             : /\/regenerator-runtime\//,
         // @ts-ignore
         defaultIsModuleExports: false,
+        transformMixedEsModules: true,
       }),
       json(),
       {
