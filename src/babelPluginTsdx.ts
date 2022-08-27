@@ -89,6 +89,13 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
           name: '@babel/plugin-syntax-top-level-await',
         },
         {
+          /**
+           * @see https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats
+           * @see https://github.com/G-Rath/babel-plugin-replace-ts-export-assignment/blob/master/test/src/index.spec.ts
+           */
+          name: 'babel-plugin-replace-ts-export-assignment',
+        },
+        {
           name: '@babel/plugin-transform-typescript',
           /**
            * @see https://babeljs.io/docs/en/babel-plugin-transform-typescript#optimizeconstenums
