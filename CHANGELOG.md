@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.3.1...@bluelovers/tsdx@2.4.1) (2022-08-27)
+
+
+
+### ✨　Features
+
+* use `v8-compile-cache` ([b27d2c4](https://github.com/bluelovers/tsdx/commit/b27d2c45f676747267a3a5983359b6ff2ed6a67e))
+* set `sourceType` as `unambiguous` ([6a015ed](https://github.com/bluelovers/tsdx/commit/6a015edec20aeb1d4419196bce0440f88a871e89))
+* support typescript `export =` ([afe3992](https://github.com/bluelovers/tsdx/commit/afe399241156ec211e83b6aa3dc31409a7452cd0))
+* support `.umd.ts` or `.umd.js` ([b05ae32](https://github.com/bluelovers/tsdx/commit/b05ae32d4e8154f6bdb5baf7ac1c90ee6fcd03d0))
+* **rollup:** set `transformMixedEsModules` = true ([b328a63](https://github.com/bluelovers/tsdx/commit/b328a635b3642473e344b5cb8814a145fe4dc5d8))
+
+
+
 ## [2.3.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.2.6...@bluelovers/tsdx@2.3.1) (2022-08-21)
 
 
