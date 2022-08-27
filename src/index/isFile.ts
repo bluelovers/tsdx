@@ -22,6 +22,8 @@ export async function jsOrTs(filename: string, currentFormat: ModuleFormat)
 			'.cts',
 		] : currentFormat === EnumFormat.esm ? [
 			'.mts',
+		] : currentFormat === EnumFormat.umd ? [
+			'.umd.ts',
 		] : []),
 		'.ts',
 		'.tsx',
@@ -34,7 +36,11 @@ export async function jsOrTs(filename: string, currentFormat: ModuleFormat)
 			'.cjs',
 		] : currentFormat === EnumFormat.esm ? [
 			'.mjs',
-		] : []),
+		] : currentFormat === EnumFormat.umd ? [
+			'.umd.js',
+		] : [
+
+		]),
 		'.js',
 		...(currentFormat === EnumFormat.cjs ? [] : currentFormat === EnumFormat.esm ? [] : [
 			'.mjs',
