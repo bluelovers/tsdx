@@ -164,6 +164,11 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
       babelOptions.plugins || []
     );
 
+    /**
+     * @see https://babeljs.io/docs/en/options#sourcetype
+     */
+    babelOptions.sourceType = 'unambiguous';
+
     return babelOptions;
   },
 }));
