@@ -197,6 +197,9 @@ export async function createRollupConfig(
             paths.appDist,
           ],
           compilerOptions: {
+            "esModuleInterop": true,
+            "module": "esnext",
+
             sourceMap: true,
             declaration: false,
             "removeComments": true,
@@ -227,6 +230,7 @@ export async function createRollupConfig(
           compilerOptions: {
             // TS -> esnext, then leave the rest to babel-preset-env
             target: 'esnext',
+            "module": "esnext",
             // don't output declarations more than once
             ...(outputNum > 0
               ? { declaration: false, declarationMap: false }

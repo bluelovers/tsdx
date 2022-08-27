@@ -19,6 +19,7 @@
     "target": "ES2019",
     "preserveConstEnums": true,
     "resolveJsonModule": true,
+    "moduleResolution": "node",
     "newLine": "lf"
   }
 }

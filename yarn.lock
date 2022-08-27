@@ -2458,6 +2458,11 @@ babel-plugin-replace-identifiers@^0.1.1:
   resolved "https://registry.npmjs.org/babel-plugin-replace-identifiers/-/babel-plugin-replace-identifiers-0.1.1.tgz#38819617d814ab0e4b35cfa373e40758b359f68f"
   integrity sha512-s3KbrGqTVRMJHjGJdv4zy1ZTrVFbLO6sesEpiJiIyg4BB5WmFvGPDhqLBKm2BZcvLhYpXHcwyGcpX0PnKqTFlA==
 
+babel-plugin-replace-ts-export-assignment@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npmjs.org/babel-plugin-replace-ts-export-assignment/-/babel-plugin-replace-ts-export-assignment-0.0.2.tgz#927a30ba303fcf271108980a8d4f80a693e1d53f"
+  integrity sha512-BiTEG2Ro+O1spuheL5nB289y37FFmz0ISE6GjpNCG2JuA/WNcuEHSYw01+vN8quGf208sID3FnZFDwVyqX18YQ==
+
 "babel-plugin-styled-components@>= 1.12.0":
   version "2.0.7"
   resolved "https://registry.npmjs.org/babel-plugin-styled-components/-/babel-plugin-styled-components-2.0.7.tgz#c81ef34b713f9da2b7d3f5550df0d1e19e798086"
@@ -7913,11 +7918,6 @@ typescript@>=3.0.1:
   version "4.7.4"
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
-
-typescript@next:
-  version "4.9.0-dev.20220820"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.0-dev.20220820.tgz#24bacca27727f163abaee1e774faf05f33b33291"
-  integrity sha512-2BZrCbymSKqBj9IaoF6EXkVpfwLko1fceDKpKxhkcomTjzKMSyuvy7mHl6DyxgwBbGkESYnOHIUz84Tnf/iL2A==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
