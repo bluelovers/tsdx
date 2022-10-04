@@ -89,6 +89,9 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
           name: '@babel/plugin-syntax-top-level-await',
         },
         {
+          name: '@babel/plugin-proposal-nullish-coalescing-operator',
+        },
+        {
           /**
            * @see https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats
            * @see https://github.com/G-Rath/babel-plugin-replace-ts-export-assignment/blob/master/test/src/index.spec.ts
