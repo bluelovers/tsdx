@@ -66,12 +66,21 @@ export async function createRollupConfig(
   // borrowed from https://github.com/facebook/create-react-app/pull/7248
   //const tsconfigJSON = ts.readConfigFile(tsconfigPath, ts.sys.readFile).config;
   const tsconfigJSON = getCurrentTsconfig(paths.appRoot, null, tsconfigPath);
+
+  tsconfigJSON.include ??= [];
+  tsconfigJSON.include = [
+    tsconfigJSON.include,
+    opts.input
+  ].flat().filter(v => (v ?? false) === false);
+
   // borrowed from https://github.com/ezolenko/rollup-plugin-typescript2/blob/42173460541b0c444326bf14f2c8c27269c4cb11/src/parse-tsconfig.ts#L48
-  const tsCompilerOptions = ts.parseJsonConfigFileContent(
+  const parsedConfig = ts.parseJsonConfigFileContent(
     tsconfigJSON,
     ts.sys,
     './'
-  ).options;
+  );
+
+  const tsCompilerOptions = parsedConfig.options;
 
   return {
     // Tell Rollup the entry point to the package
