@@ -71,7 +71,7 @@ export async function createRollupConfig(
   tsconfigJSON.include = [
     tsconfigJSON.include,
     opts.input
-  ].flat().filter(v => (v ?? false) === false);
+  ].flat().filter(v => (v ?? false) !== false);
 
   // borrowed from https://github.com/ezolenko/rollup-plugin-typescript2/blob/42173460541b0c444326bf14f2c8c27269c4cb11/src/parse-tsconfig.ts#L48
   const parsedConfig = ts.parseJsonConfigFileContent(
@@ -245,6 +245,7 @@ export async function createRollupConfig(
               ? { declaration: false, declarationMap: false }
               : {}),
           },
+          include: tsconfigJSON.include,
         },
         check: !opts.transpileOnly && outputNum === 0,
         useTsconfigDeclarationDir: Boolean(tsCompilerOptions?.declarationDir),
