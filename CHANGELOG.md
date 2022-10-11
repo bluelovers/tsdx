@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.4.4...@bluelovers/tsdx@3.0.1) (2022-10-11)
+
+
+### BREAKING CHANGES
+
+* beautify and change cjs entry
+
+
+
+### ✨　Features
+
+* beautify and change cjs entry ([0f1dd00](https://github.com/bluelovers/tsdx/commit/0f1dd00bfa2a5505f71a5ae6a524887f57c74dae))
+
+
+
 ## [2.4.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.4.3...@bluelovers/tsdx@2.4.4) (2022-10-11)
 
 
