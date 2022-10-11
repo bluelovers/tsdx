@@ -96,6 +96,7 @@ function createFormats(
 			{
 				...opts,
 				format,
+				env: 'production',
 				input,
 			},
 		]

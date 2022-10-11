@@ -49,7 +49,7 @@ export async function createRollupConfig(
     //`${paths.appDist}/${safePackageName(opts.name)}`,
     `${paths.appDist}/${safePackageName(opts.outputName || opts.name)}`,
     opts.format,
-    opts.env,
+    (!isEsm || opts.env !== 'production') && opts.env,
     shouldMinify && (opts.esmMinify || !isEsm) ? 'min' : '',
     isEsm ? 'mjs' : EnumFormat.cjs,
   ]
@@ -267,14 +267,15 @@ export async function createRollupConfig(
         },
         babelHelpers: 'bundled',
       } as RollupBabelInputPluginOptions),
-      opts.env !== undefined &&
-        replace({
-          preventAssignment: false,
-          objectGuards: true,
-          values: {
-            'process.env.NODE_ENV': JSON.stringify(opts.env),
-          },
-        }),
+      replace({
+        preventAssignment: true,
+        objectGuards: true,
+        values: {
+          'process.env.NODE_ENV': JSON.stringify(opts.env),
+          'process.env.TSDX_FORMAT': JSON.stringify(opts.format),
+          '__TSDX_FORMAT__': JSON.stringify(opts.format),
+        },
+      }),
       /*
       cleanup({
         extensions: [...DEFAULT_BABEL_EXTENSIONS, 'ts', 'tsx'],
