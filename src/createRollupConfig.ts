@@ -290,7 +290,7 @@ export async function createRollupConfig(
           //sourcemap: true,
           output: {
             comments: false,
-            beautify: isEsm,
+            beautify: true || isEsm,
             indent_level: 2,
             keep_numbers: true,
             preserve_annotations: true,

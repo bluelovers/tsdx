@@ -9,10 +9,10 @@ export function writeCjsEntryFile(name: string)
 	const contents = `
 'use strict'
 
-if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production') {
-  ${baseLine}.cjs.production.min.cjs')
-} else {
+if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
   ${baseLine}.cjs.development.cjs')
+} else {
+  ${baseLine}.cjs.production.min.cjs')
 }
 `;
 	return outputFile(join(paths.appDist, 'index.cjs'), contents);
