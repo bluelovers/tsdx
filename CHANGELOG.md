@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.4.3...@bluelovers/tsdx@2.4.4) (2022-10-11)
+
+
+
+### 🐛　Bug Fixes
+
+* avoid check type error out of input files ([a9a8aec](https://github.com/bluelovers/tsdx/commit/a9a8aec7358c289fe0b789d5c4ec65bf12e9f852))
+* avoid check type error out of input files ([8c30bad](https://github.com/bluelovers/tsdx/commit/8c30bad85c2bb57abb7ee1258c53d60e94acd772))
+
+
+### ✨　Features
+
+* add `__TSDX_FORMAT__` ([8ccbb7b](https://github.com/bluelovers/tsdx/commit/8ccbb7ba993b3d1230ca9a666c84827d73863058))
+
+
+### 📌　Dependencies
+
+* update deps ([750db43](https://github.com/bluelovers/tsdx/commit/750db433d1f8194b2dceee3f07deb64f66cecc83))
+
+
+### 🔖　Miscellaneous
+
+* . ([7837a8d](https://github.com/bluelovers/tsdx/commit/7837a8daec7465cbecbfc444e7cb89a7e74f36b6))
+
+
+
 ## [2.4.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@2.4.2...@bluelovers/tsdx@2.4.3) (2022-09-10)
 
 
