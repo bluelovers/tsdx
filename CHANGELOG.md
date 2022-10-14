@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.2...@bluelovers/tsdx@3.0.3) (2022-10-14)
+
+
+
+### ✨　Features
+
+* update typescript options ([bec0430](https://github.com/bluelovers/tsdx/commit/bec0430fccc01cf38e86f9ee8b28cd59aa4aa9d1))
+
+
+
 ## [3.0.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.1...@bluelovers/tsdx@3.0.2) (2022-10-11)
 
 
