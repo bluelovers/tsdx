@@ -244,6 +244,10 @@ export async function createRollupConfig(
             ...(outputNum > 0
               ? { declaration: false, declarationMap: false }
               : {}),
+            "noPropertyAccessFromIndexSignature": false,
+            "noUnusedParameters": false,
+            "allowUnusedLabels": true,
+            "noUnusedLocals": false,
           },
           include: tsconfigJSON.include,
         },
