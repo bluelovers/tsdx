@@ -1,8 +1,9 @@
 import { resolveApp } from '../utils';
-import { isDir, jsOrTs } from './isFile';
+import { isDir, isFile, jsOrTs } from './isFile';
 import glob from 'tiny-glob/sync';
 import { ModuleFormat, NormalizedOpts } from '../types';
-import { reduce } from 'bluebird';
+import { reduce, map } from 'bluebird';
+import isGlob from 'is-glob';
 
 export async function getInputs(
 	entries: string | string[],
@@ -22,12 +23,31 @@ export async function getInputsWithFormat(
 	currentFormat: ModuleFormat,
 ): Promise<string[]>
 {
-	return ([] as any[])
-			.concat(
-				entries && entries.length
-					? entries
-					: (source && resolveApp(source)) ||
-					((await isDir(resolveApp('src'))) && (await jsOrTs('src/index', currentFormat))),
-			)
-			.map(file => glob(file)).flat()
+	if (entries?.length)
+	{
+		return resolveEntries(entries, currentFormat)
+	}
+
+	return [(source && resolveApp(source)) ||
+		((await isDir(resolveApp('src'))) && (await jsOrTs('src/index', currentFormat)))];
+}
+
+async function resolveEntries(entries: string | string[], currentFormat: ModuleFormat)
+{
+	return map([entries].flat(), file => {
+		if (isGlob(file))
+		{
+			return glob(file)
+		}
+		return file
+	})
+		.then(entries => entries.flat())
+		.map(async(entry: string) =>
+	{
+		if (!await isFile(entry))
+		{
+			return jsOrTs(entry, currentFormat);
+		}
+		return entry
+	})
 }
