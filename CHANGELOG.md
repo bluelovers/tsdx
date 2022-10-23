@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.3...@bluelovers/tsdx@3.0.4) (2022-10-23)
+
+
+
+### 🐛　Bug Fixes
+
+* support input entry without ext ([c51b42f](https://github.com/bluelovers/tsdx/commit/c51b42f658e003e24c3490e8189e2efe01781c1b))
+
+
+
 ## [3.0.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.2...@bluelovers/tsdx@3.0.3) (2022-10-14)
 
 
