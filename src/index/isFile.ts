@@ -12,27 +12,10 @@ export const isDir = (name: string) =>
 		.then(stats => stats.isDirectory())
 		.catch(() => false);
 
-const cacheFormatExt = new Map<IModuleFormat, ReturnType<typeof getExtensionsByFormat>>();
-
-export function _getExtensionsByFormat(currentFormat: IModuleFormat)
-{
-	let list: ReturnType<typeof getExtensionsByFormat>
-	if (cacheFormatExt.has(currentFormat))
-	{
-		list = cacheFormatExt.get(currentFormat)
-	}
-	else
-	{
-		list = getExtensionsByFormat(currentFormat);
-	}
-
-	return list.slice();
-}
-
 export async function jsOrTs(filename: string, currentFormat: IModuleFormat)
 {
 	let ret: string;
-	for (const ext of _getExtensionsByFormat(currentFormat))
+	for (const ext of getExtensionsByFormat(currentFormat))
 	{
 		const name = `${filename}${ext}`;
 		ret = resolveApp(name);

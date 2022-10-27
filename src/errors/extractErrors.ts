@@ -11,7 +11,7 @@ import traverse from '@babel/traverse';
 import { invertObject } from './invertObject';
 import { evalToString } from './evalToString';
 import { paths } from '../constants';
-import { safeVariableName } from '../utils';
+import { safeVariableName } from 'safe-variable-name';
 import { pascalCase } from 'pascal-case';
 
 const babelParserOptions: ParserOptions = {

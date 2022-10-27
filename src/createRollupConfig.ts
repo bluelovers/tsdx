@@ -1,4 +1,5 @@
-import { external, safePackageName, safeVariableName } from './utils';
+import { external, safePackageName } from './utils';
+import { safeVariableName } from 'safe-variable-name';
 import { paths } from './constants';
 import { RollupOptions } from 'rollup';
 import { terser } from 'rollup-plugin-terser';

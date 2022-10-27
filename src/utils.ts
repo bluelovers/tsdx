@@ -1,18 +1,10 @@
 import { realpathSync } from 'fs-extra';
-import path from 'path';
-import camelCase from 'camelcase';
+import { isAbsolute, resolve } from 'path';
 
 import { PackageJson } from './types';
 
 // Remove the package name scope if it exists
 export const removeScope = (name: string) => name.replace(/^@.*\//, '');
-
-// UMD-safe package name
-export const safeVariableName = (name: string) =>
-  camelCase(
-    name.replace(/([^a-z\-_ ])/ig, '-')
-    , { pascalCase: true, preserveConsecutiveUppercase: true, locale: 'en-US' })
-    .replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, '');
 
 export const safePackageName = (name: string) =>
   name
@@ -20,13 +12,13 @@ export const safePackageName = (name: string) =>
     .replace(/(^@.*\/)|((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, '');
 
 export const external = (id: string) =>
-  !id.startsWith('.') && !path.isAbsolute(id);
+  !id.startsWith('.') && !isAbsolute(id);
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebookincubator/create-react-app/issues/637
 export const appDirectory = realpathSync(process.cwd());
 export const resolveApp = function(relativePath: string) {
-  return path.resolve(appDirectory, relativePath);
+  return resolve(appDirectory, relativePath);
 };
 
 // Taken from Create React App, react-dev-utils/clearConsole
