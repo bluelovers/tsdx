@@ -1,7 +1,7 @@
-import { ModuleFormat, NormalizedOpts, WatchOpts } from '../types';
+import { NormalizedOpts, WatchOpts } from '../types';
 import { appPackageJson } from './appPackageJson';
 import { getInputs } from './getInputs';
-import { EnumFormat } from '../const';
+import { EnumTsdxFormat, IModuleFormat } from '@ts-type/tsdx-extensions-by-format';
 import { array_unique } from 'array-hyper-unique';
 
 export function normalizeFormat(rawFormat: string)
@@ -10,10 +10,10 @@ export function normalizeFormat(rawFormat: string)
 	{
 		if (format === 'es')
 		{
-			return EnumFormat.esm;
+			return EnumTsdxFormat.esm;
 		}
 		return format;
-	})) as [ModuleFormat, ...ModuleFormat[]]
+	})) as [IModuleFormat, ...IModuleFormat[]]
 }
 
 export async function normalizeOpts(opts: WatchOpts): Promise<NormalizedOpts>

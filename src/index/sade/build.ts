@@ -11,7 +11,7 @@ import { OutputOptions, rollup, RollupOptions } from 'rollup';
 import { moveTypes } from '../../deprecated';
 import { logError } from '../../logError';
 import { assertCheckEntryExists } from '../checkEntryExists';
-import { EnumFormat } from '../../const';
+import { defaultFormatOrder, EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 
 prog
 	.command('build')
@@ -25,7 +25,7 @@ prog
 	.example('build --name Foo')
 	.option('--outputName', 'Specify name of output file', 'index')
 	.example('build --outputName index')
-	.option('--format', 'Specify module format(s)', 'cjs,esm,umd')
+	.option('--format', 'Specify module format(s)', defaultFormatOrder().join(','))
 	.example('build --format cjs,esm')
 	.option('--noClean', "Don't clean the dist folder")
 	.example('build --noClean')
@@ -57,7 +57,7 @@ prog
 		}
 
 		const logger = await createProgressEstimator();
-		if (opts.format.includes(EnumFormat.cjs))
+		if (opts.format.includes(EnumTsdxFormat.cjs))
 		{
 			const promise = writeCjsEntryFile(opts.outputName || opts.name).catch(logError);
 			await logger(promise, 'Creating CJS entry file');

@@ -1,4 +1,4 @@
-import { safeVariableName, safePackageName, external } from './utils';
+import { external, safePackageName, safeVariableName } from './utils';
 import { paths } from './constants';
 import { RollupOptions } from 'rollup';
 import { terser } from 'rollup-plugin-terser';
@@ -6,9 +6,7 @@ import { DEFAULT_EXTENSIONS as DEFAULT_BABEL_EXTENSIONS } from '@babel/core';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
-import resolve, {
-  DEFAULTS as RESOLVE_DEFAULTS,
-} from '@rollup/plugin-node-resolve';
+import resolve, { DEFAULTS as RESOLVE_DEFAULTS } from '@rollup/plugin-node-resolve';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import ts from 'typescript';
@@ -22,7 +20,7 @@ import { getCurrentTsconfig } from 'get-current-tsconfig';
 import { findTsconfig } from '@yarn-tool/find-tsconfig';
 import { pathExistsSync } from 'fs-extra';
 import { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
-import { EnumFormat } from './const';
+import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 
 const errorCodeOpts = {
   errorMapFilePath: paths.appErrorsJson,
@@ -40,7 +38,7 @@ export async function createRollupConfig(
     ...opts,
   });
 
-  const isEsm = opts.format === EnumFormat.esm;
+  const isEsm = opts.format === EnumTsdxFormat.esm;
 
   const shouldMinify =
     opts.minify !== undefined ? opts.minify : opts.env === 'production' || isEsm;
@@ -51,7 +49,7 @@ export async function createRollupConfig(
     opts.format,
     (!isEsm || opts.env !== 'production') && opts.env,
     shouldMinify && (opts.esmMinify || !isEsm) ? 'min' : '',
-    isEsm ? 'mjs' : EnumFormat.cjs,
+    isEsm ? 'mjs' : EnumTsdxFormat.cjs,
   ]
     .filter(Boolean)
     .join('.');
@@ -309,7 +307,7 @@ export async function createRollupConfig(
             conditionals: true,
           },
           ecma: 2019,
-          toplevel: opts.format === EnumFormat.cjs,
+          toplevel: opts.format === EnumTsdxFormat.cjs,
           warnings: true,
           keep_classnames: true,
           keep_fnames: true,

@@ -2,12 +2,11 @@ import { OutputOptions, RollupOptions } from 'rollup';
 import { existsSync } from 'fs-extra';
 
 import { paths } from './constants';
-import { ModuleFormat, NormalizedOpts, TsdxOptions } from './types';
+import { NormalizedOpts, TsdxOptions } from './types';
 
 import { createRollupConfig } from './createRollupConfig';
-import { EnumFormat } from './const';
+import { EnumTsdxFormat, IModuleFormat, isAllowedFormat } from '@ts-type/tsdx-extensions-by-format';
 import { map } from 'bluebird';
-import { ITSTypeAndStringLiteral } from 'ts-type/lib/helper/string';
 
 // check for custom tsdx.config.js
 let tsdxConfig = {
@@ -22,22 +21,10 @@ if (existsSync(paths.appConfig))
 	tsdxConfig = require(paths.appConfig);
 }
 
-const allowFormat = [
-	EnumFormat.cjs,
-	EnumFormat.esm,
-	EnumFormat.umd,
-	EnumFormat.system,
-] as ITSTypeAndStringLiteral<EnumFormat>[];
-
-export function isAllowFormat(format: ITSTypeAndStringLiteral<EnumFormat>)
-{
-	return allowFormat.includes(format)
-}
-
 export function createBuildAllInputs(opts: NormalizedOpts)
 {
 	return opts.format.map(format => {
-		if (isAllowFormat(format))
+		if (isAllowedFormat(format))
 		{
 			const options = opts.input[format].map(input =>
 			{
@@ -85,12 +72,12 @@ export async function createBuildConfigs(
 }
 
 function createFormats(
-	format: ModuleFormat,
+	format: IModuleFormat,
 	opts: NormalizedOpts,
 	input: string,
 )
 {
-	if (format === EnumFormat.esm && !opts.esmMinify)
+	if (format === EnumTsdxFormat.esm && !opts.esmMinify)
 	{
 		return [
 			{

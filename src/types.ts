@@ -1,5 +1,4 @@
-import { EnumFormat } from './const';
-import { ITSTypeAndStringLiteral } from 'ts-type/lib/helper/string';
+import { IModuleFormat } from '@ts-type/tsdx-extensions-by-format';
 
 interface SharedOpts {
   // JS target
@@ -10,8 +9,6 @@ interface SharedOpts {
   extractErrors?: boolean;
   esmMinify: boolean;
 }
-
-export type ModuleFormat = ITSTypeAndStringLiteral<EnumFormat>;
 
 export interface BuildOpts extends SharedOpts {
   name?: string;
@@ -33,8 +30,8 @@ export interface WatchOpts extends BuildOpts {
 export interface NormalizedOpts
   extends Omit<WatchOpts, 'name' | 'input' | 'format'> {
   name: string;
-  input: Record<ModuleFormat, string[]>;
-  format: [ModuleFormat, ...ModuleFormat[]];
+  input: Record<IModuleFormat, string[]>;
+  format: [IModuleFormat, ...IModuleFormat[]];
   esmMinify: boolean;
 }
 
@@ -47,7 +44,7 @@ export interface TsdxOptions extends SharedOpts {
   // Environment
   env: 'development' | 'production';
   // Module format
-  format: ModuleFormat;
+  format: IModuleFormat;
   // Is minifying?
   minify?: boolean;
   // Is this the very first rollup config (and thus should one-off metadata be extracted)?

@@ -11,7 +11,7 @@ import { moveTypes } from '../../deprecated';
 import { normalizeOpts } from '../normalizeOpts';
 import { cleanDistFolder } from '../cleanDistFolder';
 import { writeCjsEntryFile } from '../writeCjsEntryFile';
-import { EnumFormat } from '../../const';
+import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 
 prog
 	.command('watch')
@@ -53,7 +53,7 @@ prog
 		{
 			await cleanDistFolder();
 		}
-		if (opts.format.includes(EnumFormat.cjs))
+		if (opts.format.includes(EnumTsdxFormat.cjs))
 		{
 			await writeCjsEntryFile(opts.outputName || opts.name);
 		}

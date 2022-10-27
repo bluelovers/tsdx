@@ -1,14 +1,15 @@
 import { resolveApp } from '../utils';
 import { isDir, isFile, jsOrTs } from './isFile';
 import glob from 'tiny-glob/sync';
-import { ModuleFormat, NormalizedOpts } from '../types';
-import { reduce, map } from 'bluebird';
+import { NormalizedOpts } from '../types';
+import { IModuleFormat } from '@ts-type/tsdx-extensions-by-format';
+import { map, reduce } from 'bluebird';
 import isGlob from 'is-glob';
 
 export async function getInputs(
 	entries: string | string[],
 	source: string,
-	formatList: ModuleFormat[],
+	formatList: IModuleFormat[],
 )
 {
 	return reduce(formatList, async (a, format) => {
@@ -20,7 +21,7 @@ export async function getInputs(
 export async function getInputsWithFormat(
 	entries: string | string[],
 	source: string,
-	currentFormat: ModuleFormat,
+	currentFormat: IModuleFormat,
 ): Promise<string[]>
 {
 	if (entries?.length)
@@ -32,7 +33,7 @@ export async function getInputsWithFormat(
 		((await isDir(resolveApp('src'))) && (await jsOrTs('src/index', currentFormat)))];
 }
 
-async function resolveEntries(entries: string | string[], currentFormat: ModuleFormat)
+async function resolveEntries(entries: string | string[], currentFormat: IModuleFormat)
 {
 	return map([entries].flat(), file => {
 		if (isGlob(file))

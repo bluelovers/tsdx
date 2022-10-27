@@ -1,7 +1,6 @@
 import { stat } from 'fs-extra';
 import { resolveApp } from '../utils';
-import { ModuleFormat } from '../types';
-import { EnumFormat } from '../const';
+import { getExtensionsByFormat, IModuleFormat } from '@ts-type/tsdx-extensions-by-format';
 
 export const isFile = (name: string) =>
 	stat(name)
@@ -13,41 +12,27 @@ export const isDir = (name: string) =>
 		.then(stats => stats.isDirectory())
 		.catch(() => false);
 
-export async function jsOrTs(filename: string, currentFormat: ModuleFormat)
+const cacheFormatExt = new Map<IModuleFormat, ReturnType<typeof getExtensionsByFormat>>();
+
+export function _getExtensionsByFormat(currentFormat: IModuleFormat)
 {
+	let list: ReturnType<typeof getExtensionsByFormat>
+	if (cacheFormatExt.has(currentFormat))
+	{
+		list = cacheFormatExt.get(currentFormat)
+	}
+	else
+	{
+		list = getExtensionsByFormat(currentFormat);
+	}
 
+	return list.slice();
+}
+
+export async function jsOrTs(filename: string, currentFormat: IModuleFormat)
+{
 	let ret: string;
-	for (const ext of [
-		...(currentFormat === EnumFormat.cjs ? [
-			'.cts',
-		] : currentFormat === EnumFormat.esm ? [
-			'.mts',
-		] : currentFormat === EnumFormat.umd ? [
-			'.umd.ts',
-		] : []),
-		'.ts',
-		'.tsx',
-		...(currentFormat === EnumFormat.cjs ? [] : currentFormat === EnumFormat.esm ? [] : [
-			'.mts',
-			'.cts',
-		]),
-		'.jsx',
-		...(currentFormat === EnumFormat.cjs ? [
-			'.cjs',
-		] : currentFormat === EnumFormat.esm ? [
-			'.mjs',
-		] : currentFormat === EnumFormat.umd ? [
-			'.umd.js',
-		] : [
-
-		]),
-		'.js',
-		...(currentFormat === EnumFormat.cjs ? [] : currentFormat === EnumFormat.esm ? [] : [
-			'.mjs',
-			'.cjs',
-		]),
-		'.js',
-	] as const)
+	for (const ext of _getExtensionsByFormat(currentFormat))
 	{
 		const name = `${filename}${ext}`;
 		ret = resolveApp(name);

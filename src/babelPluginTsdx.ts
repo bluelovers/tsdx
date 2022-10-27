@@ -1,7 +1,7 @@
 import { createConfigItem } from '@babel/core';
 import { createBabelInputPluginFactory } from '@rollup/plugin-babel';
 import merge from 'lodash.merge';
-import { EnumFormat } from './const';
+import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 
 export const isTruthy = (obj?: any) => {
   if (!obj) {
@@ -72,7 +72,7 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
         { name: 'babel-plugin-macros' },
         { name: 'babel-plugin-annotate-pure-calls' },
         { name: 'babel-plugin-dev-expression' },
-        customOptions.format !== EnumFormat.cjs && {
+        customOptions.format !== EnumTsdxFormat.cjs && {
           name: 'babel-plugin-transform-rename-import',
           replacements,
         },

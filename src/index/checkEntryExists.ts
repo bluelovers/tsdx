@@ -1,10 +1,9 @@
 import { NormalizedOpts } from '../types';
 import { pathExists } from 'fs-extra';
 import { each } from 'bluebird';
-import { EnumFormat } from '../const';
-import { ITSTypeAndStringLiteral } from 'ts-type/lib/helper/string';
+import { IModuleFormat } from '@ts-type/tsdx-extensions-by-format';
 
-export async function _checkEntryExists(inputList: string[], format: ITSTypeAndStringLiteral<EnumFormat>)
+export async function _checkEntryExists(inputList: string[], format: IModuleFormat)
 {
 	let bool: boolean = inputList.length > 0;
 
