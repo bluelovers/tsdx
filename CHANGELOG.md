@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.5...@bluelovers/tsdx@3.0.6) (2022-10-27)
+
+
+
+### 📦　Code Refactoring
+
+* code splitting to @ts-type/tsdx-extensions-by-format ([ac0917d](https://github.com/bluelovers/tsdx/commit/ac0917d70ff022d5d14aa20de52523062e7a36cb))
+
+
+### 📌　Dependencies
+
+* update deps ([89bb54f](https://github.com/bluelovers/tsdx/commit/89bb54fb39f15662d5464ca93cf7431d08e57166))
+
+
+
 ## [3.0.5](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.4...@bluelovers/tsdx@3.0.5) (2022-10-24)
 
 **Note:** Version bump only for package @bluelovers/tsdx
