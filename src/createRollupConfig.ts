@@ -264,7 +264,7 @@ export async function createRollupConfig(
         ],
         passPerPreset: true,
         custom: {
-          targets: opts.target === 'node' ? { node: '12' } : undefined,
+          targets: opts.target === 'node' ? { node: opts.targetVersion ?? '12' } : undefined,
           extractErrors: opts.extractErrors,
           format: opts.format,
         },

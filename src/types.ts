@@ -8,6 +8,7 @@ interface SharedOpts {
   // Is error extraction running?
   extractErrors?: boolean;
   esmMinify: boolean;
+  targetVersion?: string;
 }
 
 export interface BuildOpts extends SharedOpts {
@@ -15,7 +16,6 @@ export interface BuildOpts extends SharedOpts {
   outputName?: string;
   entry?: string | string[];
   format: 'cjs,esm';
-  target: 'browser';
 }
 
 export interface WatchOpts extends BuildOpts {
