@@ -88,9 +88,9 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
         {
           name: '@babel/plugin-syntax-top-level-await',
         },
-        {
-          name: '@babel/plugin-proposal-nullish-coalescing-operator',
-        },
+//        {
+//          name: '@babel/plugin-proposal-nullish-coalescing-operator',
+//        },
         {
           /**
            * @see https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats
@@ -112,7 +112,7 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
     );
 
     const babelOptions = config.options || {};
-    babelOptions.presets = babelOptions.presets || [];
+    babelOptions.presets ||= [];
 
     const presetEnvIdx = babelOptions.presets.findIndex((preset: any) =>
       preset.file.request.includes('@babel/preset-env')
