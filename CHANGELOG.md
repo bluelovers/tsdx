@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.7...@bluelovers/tsdx@3.1.1) (2022-12-03)
+
+
+### BREAKING CHANGES
+
+* allow specify target node version
+* disable @babel/plugin-proposal-nullish-coalescing-operator
+
+
+
+### ✨　Features
+
+* allow specify target node version ([112e645](https://github.com/bluelovers/tsdx/commit/112e645624803e762b9e2e4c9470c8f3ad313ada))
+* disable @babel/plugin-proposal-nullish-coalescing-operator ([eeee090](https://github.com/bluelovers/tsdx/commit/eeee090be22b62f09ded90c76970bb624cebc0d8))
+
+
+
 ## [3.0.7](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.6...@bluelovers/tsdx@3.0.7) (2022-10-27)
 
 
