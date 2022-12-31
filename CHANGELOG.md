@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.1.1...@bluelovers/tsdx@3.1.2) (2022-12-31)
+
+
+
+### 🐛　Bug Fixes
+
+* '--resolveJsonModule' cannot be specified when 'moduleResolution' is set to 'classic' ([a7fac3c](https://github.com/bluelovers/tsdx/commit/a7fac3cd3cfa523cfc237555230206ef3470c029))
+
+
+### 📌　Dependencies
+
+* update deps ([9e92995](https://github.com/bluelovers/tsdx/commit/9e929950aedf8aaae279880492f2a8c136fa68fa))
+
+
+
 ## [3.1.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.0.7...@bluelovers/tsdx@3.1.1) (2022-12-03)
 
 
