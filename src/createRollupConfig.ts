@@ -206,7 +206,7 @@ export async function createRollupConfig(
           ],
           compilerOptions: {
             "esModuleInterop": true,
-            "module": "esnext",
+            //"module": "esnext",
 
             sourceMap: true,
             declaration: false,

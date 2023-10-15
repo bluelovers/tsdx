@@ -149,6 +149,9 @@ export const babelPluginTsdx = createBabelInputPluginFactory(() => ({
           //loose: true,
         },
         {
+          name: '@babel/preset-react',
+        },
+        {
           name: '@babel/preset-typescript',
         },
       ]);
