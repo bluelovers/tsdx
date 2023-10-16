@@ -2,13 +2,13 @@ import { external, safePackageName } from './utils';
 import { safeVariableName } from 'safe-variable-name';
 import { paths } from './constants';
 import { RollupOptions } from 'rollup';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import { DEFAULT_EXTENSIONS as DEFAULT_BABEL_EXTENSIONS } from '@babel/core';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import resolve, { DEFAULTS as RESOLVE_DEFAULTS } from '@rollup/plugin-node-resolve';
-import sourceMaps from 'rollup-plugin-sourcemaps';
+//import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import ts from 'typescript';
 // @ts-ignore
@@ -269,6 +269,7 @@ export async function createRollupConfig(
           format: opts.format,
         },
         babelHelpers: 'bundled',
+        inputSourceMap: true,
       } as RollupBabelInputPluginOptions),
       replace({
         preventAssignment: true,
@@ -287,7 +288,7 @@ export async function createRollupConfig(
         maxEmptyLines: 0,
       }),
        */
-      sourceMaps(),
+      //sourceMaps(),
       shouldMinify &&
         terser({
           //sourcemap: true,
