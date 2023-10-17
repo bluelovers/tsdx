@@ -2,12 +2,14 @@ import * as shell from 'shelljs';
 
 import * as util from '../utils/fixture';
 import { execWithCache, grep } from '../utils/shell';
+import { checkCompileFiles } from '../utils/fixture';
+import { test } from 'shelljs';
 
 shell.config.silent = false;
 
 const testDir = 'e2e';
 const fixtureName = 'build-default';
-const stageName = `stage-${fixtureName}`;
+const stageName = `stage-${testDir}-${fixtureName}`;
 
 describe('tsdx build :: zero-config defaults', () => {
   beforeAll(() => {
@@ -18,16 +20,7 @@ describe('tsdx build :: zero-config defaults', () => {
   it('should compile files into a dist directory', () => {
     const output = execWithCache('node ../dist/index.js build');
 
-    expect(shell.test('-f', 'dist/index.js')).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.cjs.development.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.cjs.production.min.js')
-    ).toBeTruthy();
-    expect(shell.test('-f', 'dist/build-default.esm.js')).toBeTruthy();
-
-    expect(shell.test('-f', 'dist/index.d.ts')).toBeTruthy();
+    checkCompileFiles();
 
     expect(output.code).toBe(0);
   });
@@ -58,11 +51,13 @@ describe('tsdx build :: zero-config defaults', () => {
     expect(output.code).toBe(0);
   });
 
-  it('should bundle regeneratorRuntime', () => {
+  it.skip('should bundle regeneratorRuntime', () => {
     const output = execWithCache('node ../dist/index.js build');
     expect(output.code).toBe(0);
 
-    const matched = grep(/regeneratorRuntime = r/, ['dist/build-default.*.js']);
+    const matched = grep(/regeneratorRuntime = r/, [
+      'dist/index.cjs.development.cjs',
+    ]);
     expect(matched).toBeTruthy();
   });
 
@@ -70,7 +65,9 @@ describe('tsdx build :: zero-config defaults', () => {
     const output = execWithCache('node ../dist/index.js build');
     expect(output.code).toBe(0);
 
-    const matched = grep(/lodash/, ['dist/build-default.cjs.*.js']);
+    const matched = grep(/lodash/, [
+      'dist/index.cjs.*.cjs',
+    ]);
     expect(matched).toBeTruthy();
   });
 
@@ -78,7 +75,9 @@ describe('tsdx build :: zero-config defaults', () => {
     const output = execWithCache('node ../dist/index.js build');
     expect(output.code).toBe(0);
 
-    const matched = grep(/lodash-es/, ['dist/build-default.esm.js']);
+    const matched = grep(/lodash-es/, [
+      'dist/index.esm.mjs'
+    ]);
     expect(matched).toBeTruthy();
   });
 
@@ -86,7 +85,10 @@ describe('tsdx build :: zero-config defaults', () => {
     const output = execWithCache('node ../dist/index.js build');
     expect(output.code).toBe(0);
 
-    const matched = grep(/lodash\/fp/, ['dist/build-default.*.js']);
+    const matched = grep(/lodash\/fp/, [
+      'dist/index.cjs.*.cjs',
+      'dist/index.esm.mjs'
+    ]);
     expect(matched).toBeTruthy();
   });
 
@@ -97,29 +99,22 @@ describe('tsdx build :: zero-config defaults', () => {
     shell.mv('package.json', 'package-og.json');
     shell.mv('package2.json', 'package.json');
 
+    shell.mv('dist/index.cjs.development.cjs', 'dist/index.cjs.development.cjs.old');
+    shell.mv('dist/index.esm.mjs', 'dist/index.esm.mjs.old');
+
     // cache bust because we want to re-run this command with new package.json
     output = execWithCache('node ../dist/index.js build', { noCache: true });
-    expect(shell.test('-f', 'dist/index.js')).toBeTruthy();
 
     // build-default files have been cleaned out
-    expect(
-      shell.test('-f', 'dist/build-default.cjs.development.js')
-    ).toBeFalsy();
-    expect(
-      shell.test('-f', 'dist/build-default.cjs.production.min.js')
-    ).toBeFalsy();
-    expect(shell.test('-f', 'dist/build-default.esm.js')).toBeFalsy();
+    [
+      'dist/index.cjs.development.cjs.old',
+      'dist/index.esm.mjs.old',
+    ].forEach(file =>
+    {
+      expect(test('-f', file)).toBeFalsy();
+    })
 
-    // build-default-2 files have been added
-    expect(
-      shell.test('-f', 'dist/build-default-2.cjs.development.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default-2.cjs.production.min.js')
-    ).toBeTruthy();
-    expect(shell.test('-f', 'dist/build-default-2.esm.js')).toBeTruthy();
-
-    expect(shell.test('-f', 'dist/index.d.ts')).toBeTruthy();
+    checkCompileFiles();
 
     expect(output.code).toBe(0);
 

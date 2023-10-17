@@ -22,6 +22,7 @@ import { findTsconfig } from '@yarn-tool/find-tsconfig';
 import { pathExistsSync } from 'fs-extra';
 import { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
+import { assertTsconfigPathExists, handleTsconfigPath } from './utils/ts';
 
 const errorCodeOpts = {
   errorMapFilePath: paths.appErrorsJson,
@@ -55,12 +56,12 @@ export async function createRollupConfig(
     .filter(Boolean)
     .join('.');
 
-  const tsconfigPath = opts.tsconfig || findTsconfig( paths.appRoot) || paths.tsconfigJson;
+  const {
+    tsconfig,
+    tsconfigPath,
+  } = handleTsconfigPath(opts);
 
-  if (opts.tsconfig && !pathExistsSync(tsconfigPath))
-  {
-    throw new Error('Target tsconfig does not exist: ' + tsconfigPath);
-  }
+  assertTsconfigPathExists(tsconfig, tsconfigPath);
 
   // borrowed from https://github.com/facebook/create-react-app/pull/7248
   //const tsconfigJSON = ts.readConfigFile(tsconfigPath, ts.sys.readFile).config;

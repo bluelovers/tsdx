@@ -1,18 +1,19 @@
 import * as shell from 'shelljs';
 
-import * as util from '../utils/fixture';
+import { checkCompileFiles, setupStageWithFixture, teardownStage } from '../utils/fixture';
 import { execWithCache } from '../utils/shell';
 
 shell.config.silent = false;
 
 const testDir = 'integration';
 const fixtureName = 'build-options';
-const stageName = `stage-integration-${fixtureName}`;
+const stageName = `stage-${testDir}-${fixtureName}`;
 
 describe('integration :: tsdx build :: options', () => {
+
   beforeAll(() => {
-    util.teardownStage(stageName);
-    util.setupStageWithFixture(testDir, stageName, fixtureName);
+    teardownStage(stageName);
+    setupStageWithFixture(testDir, stageName, fixtureName);
   });
 
   it('should create errors/ dir with --extractErrors', () => {
@@ -39,21 +40,12 @@ describe('integration :: tsdx build :: options', () => {
   it('should compile files into a dist directory', () => {
     const output = execWithCache('node ../dist/index.js build --extractErrors');
 
-    expect(shell.test('-f', 'dist/index.js')).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-options.cjs.development.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-options.cjs.production.min.js')
-    ).toBeTruthy();
-    expect(shell.test('-f', 'dist/build-options.esm.js')).toBeTruthy();
-
-    expect(shell.test('-f', 'dist/index.d.ts')).toBeTruthy();
+    checkCompileFiles();
 
     expect(output.code).toBe(0);
   });
 
   afterAll(() => {
-    util.teardownStage(stageName);
+    teardownStage(stageName);
   });
 });

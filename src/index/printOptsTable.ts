@@ -2,11 +2,11 @@ import { NormalizedOpts } from '../types';
 import Table from 'cli-table3';
 import { pkg } from './_';
 import { inspect } from 'util';
-import { findTsconfig } from '@yarn-tool/find-tsconfig';
 import { paths } from '../constants';
 import { pathInsideDirectory } from 'path-in-dir';
 import chalk from 'chalk';
-import { relative } from 'path';
+import { relative, normalize } from 'upath2';
+import { handleTsconfigPath } from '../utils/ts';
 
 export function printOptsTable<T extends NormalizedOpts>(opts: T)
 {
@@ -35,10 +35,12 @@ export function printOptsTable<T extends NormalizedOpts>(opts: T)
 	table.push(['process.versions.node', process.versions.node]);
 	table.push(['']);
 
-	const tsconfigPath = opts.tsconfig || findTsconfig(paths.appRoot) || paths.tsconfigJson;
+	const {
+		tsconfigPath,
+	} = handleTsconfigPath(opts);
 
 	table.push([
-		`cwd`, process.cwd(),
+		`cwd`, normalize(process.cwd()),
 	]);
 	table.push([
 		`appRoot`, paths.appRoot,
@@ -51,7 +53,7 @@ export function printOptsTable<T extends NormalizedOpts>(opts: T)
 	for (let key in opts)
 	{
 		const value = opts[key];
-		if (key === '_' || typeof value === 'undefined') continue;
+		if (key === '_' || key === 'tsconfig' || typeof value === 'undefined') continue;
 
 		table.push([key, typeof value === 'string' ? value : inspect(value, {
 			colors: true,

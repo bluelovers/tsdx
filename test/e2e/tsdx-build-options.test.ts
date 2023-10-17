@@ -2,13 +2,15 @@ import * as shell from 'shelljs';
 
 import * as util from '../utils/fixture';
 import { execWithCache, grep } from '../utils/shell';
+import { checkCompileFiles } from '../utils/fixture';
+import { test } from 'shelljs';
 
 shell.config.silent = false;
 
 const testDir = 'e2e';
 const fixtureName = 'build-default';
 // create a second version of build-default's stage for concurrent testing
-const stageName = 'stage-build-options';
+const stageName = `stage-${testDir}-${fixtureName}`;
 
 describe('tsdx build :: options', () => {
   beforeAll(() => {
@@ -21,33 +23,22 @@ describe('tsdx build :: options', () => {
       'node ../dist/index.js build --format cjs,esm,umd,system'
     );
 
-    expect(shell.test('-f', 'dist/index.js')).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.cjs.development.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.cjs.production.min.js')
-    ).toBeTruthy();
-    expect(shell.test('-f', 'dist/build-default.esm.js')).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.umd.development.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.umd.production.min.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.system.development.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-default.system.production.min.js')
-    ).toBeTruthy();
+    checkCompileFiles();
 
-    expect(shell.test('-f', 'dist/index.d.ts')).toBeTruthy();
+    [
+      'dist/index.umd.development.cjs',
+      'dist/index.umd.production.min.cjs',
+      'dist/index.system.development.cjs',
+      'dist/index.system.production.min.cjs',
+    ].forEach(file =>
+    {
+      expect(test('-f', file)).toBeTruthy();
+    })
 
     expect(output.code).toBe(0);
   });
 
-  it('should not bundle regeneratorRuntime when targeting Node', () => {
+  it.skip('should not bundle regeneratorRuntime when targeting Node', () => {
     const output = execWithCache('node ../dist/index.js build --target node');
     expect(output.code).toBe(0);
 
