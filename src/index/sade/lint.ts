@@ -4,8 +4,7 @@ import chalk from 'chalk';
 import { createEslintConfig } from '../../createEslintConfig';
 import { appPackageJson } from '../appPackageJson';
 import { paths } from '../../constants';
-// @ts-ignore
-import { CLIEngine } from 'eslint';
+import { ESLint } from 'eslint';
 
 prog
 	.command('lint')
@@ -53,35 +52,51 @@ prog
 				writeFile: opts['write-file'],
 			});
 
-			const cli = new CLIEngine({
+			const cli = new ESLint({
 				baseConfig: {
 					...config,
-					...appPackageJson.eslint,
+					...appPackageJson?.eslint,
 				},
 				extensions: ['.ts', '.tsx', '.mts', '.cts', '.js', '.jsx', '.mjs', '.cjs'],
 				fix: opts.fix,
-				ignorePattern: opts['ignore-pattern'],
+				overrideConfig: {
+					ignorePatterns: opts['ignore-pattern'],
+				},
 			});
-			const report = cli.executeOnFiles(opts['_']);
+
+			const report = await cli.lintFiles(opts['_']);
 			if (opts.fix)
 			{
-				CLIEngine.outputFixes(report);
+				await ESLint.outputFixes(report);
 			}
-			console.log(cli.getFormatter()(report.results));
+			const formater = await cli.loadFormatter();
+			console.log(formater.format(report));
 			if (opts['report-file'])
 			{
+				const formaterJson = await cli.loadFormatter('json');
 				await outputFile(
 					opts['report-file'],
-					cli.getFormatter('json')(report.results)
+					formaterJson.format(report)
 				);
 			}
-			if (report.errorCount)
+
+			console.dir(report)
+			console.dir(ESLint.getErrorResults(report))
+
+			if (ESLint.getErrorResults(report).length)
 			{
 				process.exit(1);
 			}
-			if (report.warningCount > opts['max-warnings'])
+
+			let warningCount = 0;
+			for (const entry of report)
 			{
-				process.exit(1);
+				warningCount += entry.warningCount;
+				if (warningCount > opts['max-warnings'])
+				{
+					console.log([warningCount, opts['max-warnings']])
+					process.exit(1);
+				}
 			}
 		}
 	);
