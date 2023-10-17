@@ -69,10 +69,13 @@ prog
 		{
 			const promise = mapSeries(
 					buildConfigs,
-					async (inputOptions: RollupOptions & { output: OutputOptions }) =>
+					async (inputOptions: RollupOptions & { output: OutputOptions }, outputNum) =>
 					{
-						const bundle = await rollup(inputOptions);
-						return bundle.write(inputOptions.output);
+						const p = rollup(inputOptions)
+							.then(bundle => bundle.write(inputOptions.output))
+						;
+
+						return logger(p, `[${outputNum}] Building modules: ${inputOptions.output.format}`)
 					}
 				)
 				.tap(moveTypes);
