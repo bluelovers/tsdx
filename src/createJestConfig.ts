@@ -2,14 +2,46 @@ import { Config } from '@jest/types';
 
 export type JestConfigOptions = Partial<Config.InitialOptions>;
 
+function _requireResolve(name: string)
+{
+  let result;
+
+  try
+  {
+    // @ts-ignore
+    const { requireResolveExtra, requireResolveCore } = require('@yarn-tool/require-resolve');
+
+    const paths = [
+      requireResolveExtra('@bluelovers/tsdx').result,
+      requireResolveExtra('tsdx').result,
+    ].filter(Boolean);
+
+    result = requireResolveCore(name, {
+      includeGlobal: true,
+      includeCurrentDirectory: true,
+      paths,
+    })
+  }
+  catch (e)
+  {
+
+  }
+
+  result ||= require.resolve(name);
+
+  console.info('[require.resolve]', name, '=>', result)
+
+  return result
+}
+
 export function createJestConfig(
   _: (relativePath: string) => void,
   rootDir: string
 ): JestConfigOptions {
   const config: JestConfigOptions = {
     transform: {
-      '.(ts|tsx)$': require.resolve('ts-jest/dist'),
-      '.(js|jsx)$': require.resolve('babel-jest'), // jest's default
+      '.(ts|tsx)$': _requireResolve('ts-jest'),
+      '.(js|jsx)$': _requireResolve('babel-jest'), // jest's default
     },
     transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
@@ -22,6 +54,7 @@ export function createJestConfig(
       require.resolve('jest-watch-typeahead/filename'),
       require.resolve('jest-watch-typeahead/testname'),
     ],
+    passWithNoTests: true,
   };
 
   return config;

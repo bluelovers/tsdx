@@ -19,7 +19,7 @@ export async function createEslintConfig({
   const config = {
     extends: [
       'react-app',
-      'prettier/@typescript-eslint',
+      'prettier',
       'plugin:prettier/recommended',
     ],
     settings: {

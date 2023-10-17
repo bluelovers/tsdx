@@ -1,5 +1,5 @@
 import { realpathSync } from 'fs-extra';
-import { isAbsolute, resolve } from 'path';
+import { isAbsolute, resolve } from 'upath2';
 
 import { PackageJson } from './types';
 

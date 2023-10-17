@@ -1,9 +1,8 @@
-import * as shell from 'shelljs';
+import { execWithCache } from '../utils/shell';
+import { checkCompileFiles, grepCompileFiles, setupStageWithFixture, teardownStage } from '../utils/fixture';
+import { config } from 'shelljs';
 
-import * as util from '../utils/fixture';
-import { execWithCache, grep } from '../utils/shell';
-
-shell.config.silent = false;
+config.silent = false;
 
 const testDir = 'integration';
 const fixtureName = 'build-withBabel';
@@ -11,8 +10,8 @@ const stageName = `stage-integration-${fixtureName}`;
 
 describe('integration :: tsdx build :: .babelrc.js', () => {
   beforeAll(() => {
-    util.teardownStage(stageName);
-    util.setupStageWithFixture(testDir, stageName, fixtureName);
+    teardownStage(stageName);
+    setupStageWithFixture(testDir, stageName, fixtureName);
   });
 
   it('should convert styled-components template tags', () => {
@@ -20,9 +19,7 @@ describe('integration :: tsdx build :: .babelrc.js', () => {
     expect(output.code).toBe(0);
 
     // from styled.h1` to styled.h1.withConfig(
-    const matched = grep(/styled.h1.withConfig\(/, [
-      'dist/build-withbabel.*.js',
-    ]);
+    const matched = grepCompileFiles(/styled.h1.withConfig\(/);
     expect(matched).toBeTruthy();
   });
 
@@ -33,7 +30,7 @@ describe('integration :: tsdx build :: .babelrc.js', () => {
     expect(output.code).toBe(0);
 
     // the comment "should be removed" should no longer be there
-    const matched = grep(/should be removed/, ['dist/build-withbabel.*.js']);
+    const matched = grepCompileFiles(/should be removed/);
     expect(matched).toBeFalsy();
   });
 
@@ -42,28 +39,19 @@ describe('integration :: tsdx build :: .babelrc.js', () => {
     expect(output.code).toBe(0);
 
     // ensures replace-identifiers was used
-    const matched = grep(/replacedSum/, ['dist/build-withbabel.*.js']);
+    const matched = grepCompileFiles(/replacedSum/);
     expect(matched).toBeTruthy();
   });
 
   it('should compile files into a dist directory', () => {
     const output = execWithCache('node ../dist/index.js build');
 
-    expect(shell.test('-f', 'dist/index.js')).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-withbabel.cjs.development.js')
-    ).toBeTruthy();
-    expect(
-      shell.test('-f', 'dist/build-withbabel.cjs.production.min.js')
-    ).toBeTruthy();
-    expect(shell.test('-f', 'dist/build-withbabel.esm.js')).toBeTruthy();
-
-    expect(shell.test('-f', 'dist/index.d.ts')).toBeTruthy();
+    checkCompileFiles();
 
     expect(output.code).toBe(0);
   });
 
   afterAll(() => {
-    util.teardownStage(stageName);
+    teardownStage(stageName);
   });
 });

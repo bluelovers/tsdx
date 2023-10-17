@@ -18,8 +18,6 @@ import { extractErrors } from './errors/extractErrors';
 import { babelPluginTsdx } from './babelPluginTsdx';
 import { TsdxOptions } from './types';
 import { getCurrentTsconfig } from 'get-current-tsconfig';
-import { findTsconfig } from '@yarn-tool/find-tsconfig';
-import { pathExistsSync } from 'fs-extra';
 import { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 import { assertTsconfigPathExists, handleTsconfigPath } from './utils/ts';
@@ -73,14 +71,42 @@ export async function createRollupConfig(
     opts.input
   ].flat().filter(v => (v ?? false) !== false);
 
+//  if (outputNum > 0 && tsconfigJSON.compilerOptions)
+//  {
+//    tsconfigJSON.compilerOptions.declaration = false;
+//    tsconfigJSON.compilerOptions.declarationMap = false;
+//    tsconfigJSON.compilerOptions.declarationDir = undefined;
+//  }
+
   // borrowed from https://github.com/ezolenko/rollup-plugin-typescript2/blob/42173460541b0c444326bf14f2c8c27269c4cb11/src/parse-tsconfig.ts#L48
   const parsedConfig = ts.parseJsonConfigFileContent(
     tsconfigJSON,
     ts.sys,
-    './'
+    './',
+    null,
+    tsconfigPath,
   );
 
   const tsCompilerOptions = parsedConfig.options;
+
+  /*
+  console.dir({
+    tsconfigPath,
+    tsconfig,
+    parsedConfig,
+  }, {
+    colors: true,
+    depth: 5,
+  });
+  console.dir({
+    outputNum,
+    format: opts.format,
+    tsconfigJSON,
+    tsCompilerOptions,
+  }, {
+    colors: true,
+  });
+   */
 
   return {
     // Tell Rollup the entry point to the package
@@ -190,8 +216,9 @@ export async function createRollupConfig(
         },
       },
       typescript({
+        //verbosity: 1,
         typescript: ts,
-        tsconfig: opts.tsconfig,
+        tsconfig: tsconfigPath,
         tsconfigDefaults: {
           exclude: [
             // all TS test files, regardless whether co-located or in test/ etc
@@ -211,6 +238,9 @@ export async function createRollupConfig(
 
             sourceMap: true,
             declaration: false,
+            declarationDir: void 0,
+            declarationMap: false,
+
             "removeComments": true,
 
             "target": "ES2019",
@@ -232,18 +262,23 @@ export async function createRollupConfig(
             "inlineSourceMap": false,
             "skipLibCheck": true,
 
-            "newLine": "lf"
+            "newLine": "lf",
+
+            //...parsedConfig.raw.compilerOptions,
           },
         },
         tsconfigOverride: {
           compilerOptions: {
+            ...parsedConfig.raw.compilerOptions,
             // TS -> esnext, then leave the rest to babel-preset-env
             target: 'esnext',
             //"module": "esnext",
             // don't output declarations more than once
-            ...(outputNum > 0
-              ? { declaration: false, declarationMap: false }
-              : {}),
+            ...(outputNum > 0 ? ({
+              declaration: false,
+              declarationMap: false,
+              declarationDir: void 0,
+            }) : {}),
             "noPropertyAccessFromIndexSignature": false,
             "noUnusedParameters": false,
             "allowUnusedLabels": true,

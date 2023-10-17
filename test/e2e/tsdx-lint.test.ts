@@ -1,85 +1,93 @@
 import * as shell from 'shelljs';
 
-import * as util from '../utils/fixture';
-
-shell.config.silent = true;
+import { getFixturePath, setupStageWithFixture, teardownStage } from '../utils/fixture';
+import { join } from 'upath2';
+import { __ROOT_TEST } from '../__root';
+import { exec } from 'shelljs';
 
 const testDir = 'e2e';
-const stageName = 'stage-lint';
+const fixtureName = 'lint';
+const stageName = `stage-${testDir}-${fixtureName}`;
 
-const lintDir = `test/${testDir}/fixtures/lint`;
+const lintDir = join(__ROOT_TEST, getFixturePath(testDir, fixtureName));
+
+function testLintFile(fileName: string, code: number = 0, argv: string | unknown[] = [])
+{
+  const argvString = [argv].flat().join(' ');
+
+  const testFile = `${lintDir}/${fileName}`;
+  const output = exec(`node dist/index.js lint "${testFile}" ${argvString}`);
+
+  expect(output.code).toBe(code);
+
+  return output
+}
 
 describe('tsdx lint', () => {
   it('should fail to lint a ts file with errors', () => {
-    const testFile = `${lintDir}/file-with-lint-errors.ts`;
-    const output = shell.exec(`node dist/index.js lint ${testFile}`);
-    expect(output.code).toBe(1);
-    expect(output.stdout.includes('Parsing error:')).toBe(true);
+    const output = testLintFile('file-with-lint-errors.ts', 1);
+
+    expect(output.stdout).toMatch('Parsing error:');
   });
 
   it('should succeed linting a ts file without errors', () => {
-    const testFile = `${lintDir}/file-without-lint-error.ts`;
-    const output = shell.exec(`node dist/index.js lint ${testFile}`);
+    const output = testLintFile('file-without-lint-error.ts', 0);
+
     expect(output.code).toBe(0);
   });
 
   it('should fail to lint a ts file with prettier errors', () => {
-    const testFile = `${lintDir}/file-with-prettier-lint-errors.ts`;
-    const output = shell.exec(`node dist/index.js lint ${testFile}`);
-    expect(output.code).toBe(1);
+    const output = testLintFile('file-with-prettier-lint-errors.ts', 1);
+
     expect(output.stdout.includes('prettier/prettier')).toBe(true);
   });
 
   it('should fail to lint a tsx file with errors', () => {
-    const testFile = `${lintDir}/react-file-with-lint-errors.tsx`;
-    const output = shell.exec(`node dist/index.js lint ${testFile}`);
-    expect(output.code).toBe(1);
-    expect(output.stdout.includes('Parsing error:')).toBe(true);
+    const output = testLintFile('react-file-with-lint-errors.tsx', 1);
+
+    expect(output.stdout).toMatch('Parsing error:');
   });
 
   it('should succeed linting a tsx file without errors', () => {
-    const testFile = `${lintDir}/react-file-without-lint-error.tsx`;
-    const output = shell.exec(`node dist/index.js lint ${testFile}`);
-    expect(output.code).toBe(0);
+    testLintFile('react-file-without-lint-error.tsx', 0);
   });
 
   it('should succeed linting a ts file with warnings when --max-warnings is not used', () => {
-    const testFile = `${lintDir}/file-with-lint-warnings.ts`;
-    const output = shell.exec(`node dist/index.js lint ${testFile}`);
-    expect(output.code).toBe(0);
+    const output = testLintFile('file-with-lint-warnings.ts', 0);
+
     expect(output.stdout.includes('@typescript-eslint/no-unused-vars')).toBe(
       true
     );
   });
 
   it('should succeed linting a ts file with fewer warnings than --max-warnings', () => {
-    const testFile = `${lintDir}/file-with-lint-warnings.ts`;
-    const output = shell.exec(
-      `node dist/index.js lint ${testFile} --max-warnings 4`
-    );
-    expect(output.code).toBe(0);
+    const output = testLintFile('file-with-lint-warnings.ts', 0, [
+      '--max-warnings',
+      4,
+    ]);
+
     expect(output.stdout.includes('@typescript-eslint/no-unused-vars')).toBe(
       true
     );
   });
 
   it('should succeed linting a ts file with same number of warnings as --max-warnings', () => {
-    const testFile = `${lintDir}/file-with-lint-warnings.ts`;
-    const output = shell.exec(
-      `node dist/index.js lint ${testFile} --max-warnings 3`
-    );
-    expect(output.code).toBe(0);
+    const output = testLintFile('file-with-lint-warnings.ts', 0, [
+      '--max-warnings',
+      3,
+    ]);
+
     expect(output.stdout.includes('@typescript-eslint/no-unused-vars')).toBe(
       true
     );
   });
 
   it('should fail to lint a ts file with more warnings than --max-warnings', () => {
-    const testFile = `${lintDir}/file-with-lint-warnings.ts`;
-    const output = shell.exec(
-      `node dist/index.js lint ${testFile} --max-warnings 2`
-    );
-    expect(output.code).toBe(1);
+    const output = testLintFile('file-with-lint-warnings.ts', 1, [
+      '--max-warnings',
+      2,
+    ]);
+
     expect(output.stdout.includes('@typescript-eslint/no-unused-vars')).toBe(
       true
     );
@@ -96,18 +104,19 @@ describe('tsdx lint', () => {
 
   describe('when --write-file is used', () => {
     beforeEach(() => {
-      util.teardownStage(stageName);
-      util.setupStageWithFixture(testDir, stageName, 'build-default');
+      teardownStage(stageName);
+      setupStageWithFixture(testDir, stageName, 'build-default');
     });
 
     it('should create the file', () => {
       const output = shell.exec(`node ../dist/index.js lint --write-file`);
+
       expect(shell.test('-f', '.eslintrc.js')).toBeTruthy();
       expect(output.code).toBe(0);
     });
 
     afterAll(() => {
-      util.teardownStage(stageName);
+      teardownStage(stageName);
     });
   });
 });
