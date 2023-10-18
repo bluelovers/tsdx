@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.0...@bluelovers/tsdx@3.2.1) (2023-10-18)
+
+
+### BREAKING CHANGES
+
+* handleTsconfigPath
+* update eslint
+* use `inputSourceMap`
+
+
+
+### 📦　Code Refactoring
+
+* refactor and fix test and deps ([734e3f5](https://github.com/bluelovers/tsdx/commit/734e3f5c993d5322e97caeec9c2a8b49b1220882))
+* handleTsconfigPath ([fed9a7d](https://github.com/bluelovers/tsdx/commit/fed9a7dbd1047ed4a1c91e07b2d3edffaea1e948))
+* update eslint ([405f2f6](https://github.com/bluelovers/tsdx/commit/405f2f648121c9a8421b7100a67b061d45902139))
+* use `inputSourceMap` ([d538ab8](https://github.com/bluelovers/tsdx/commit/d538ab82b18cc526ea85580a4ccfb44471b80409))
+
+
+### ♻️　Chores
+
+* display task info ([012c253](https://github.com/bluelovers/tsdx/commit/012c253a9a636cf77976c5fda694432ac16347f5))
+
+
+### 📌　Dependencies
+
+* update deps ([425b06f](https://github.com/bluelovers/tsdx/commit/425b06f5095e15ed7fc206458fd0656070731620))
+
+
+
 # [3.2.0](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.1.3...@bluelovers/tsdx@3.2.0) (2023-10-15)
 
 **Note:** Version bump only for package @bluelovers/tsdx
