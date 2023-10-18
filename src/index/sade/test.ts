@@ -1,6 +1,6 @@
 import { prog } from './_';
 import { createJestConfig, JestConfigOptions } from '../../createJestConfig';
-import { dirname, resolve } from 'path';
+import { dirname } from 'path';
 import { paths } from '../../constants';
 import { appPackageJson } from '../appPackageJson';
 import { pathExists } from 'fs-extra';
@@ -26,7 +26,6 @@ prog
 		const argv = process.argv.slice(2);
 		let jestConfig: JestConfigOptions = {
 			...createJestConfig(
-				relativePath => resolve(__dirname, '..', relativePath),
 				opts.config ? dirname(opts.config) : paths.appRoot
 			),
 			...appPackageJson.jest,

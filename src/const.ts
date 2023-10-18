@@ -1,2 +1,3 @@
+import { join } from "upath2";
 
-export {}
+export const __ROOT_TSDX = join(__dirname, '..');
