@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.1...@bluelovers/tsdx@3.2.2) (2023-10-19)
+
+
+### BREAKING CHANGES
+
+* 修正 rollup-plugin-typescript2@>=0.35 不支援 build-lazy-cjs 的問題
+
+
+
+### 🐛　Bug Fixes
+
+* 修正 rollup-plugin-typescript2@>=0.35 不支援 build-lazy-cjs 的問題 ([0e10923](https://github.com/bluelovers/tsdx/commit/0e109231e59effde4675fa02c2d390429e630fa4))
+
+
+
 ## [3.2.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.0...@bluelovers/tsdx@3.2.1) (2023-10-18)
 
 
