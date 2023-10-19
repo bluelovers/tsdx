@@ -288,6 +288,14 @@ export async function createRollupConfig(
         },
         check: !opts.transpileOnly && outputNum === 0,
         useTsconfigDeclarationDir: Boolean(tsCompilerOptions?.declarationDir),
+
+        exclude: [
+          "*.d.ts", "**/*.d.ts", "**/*.d.cts", "**/*.d.mts",
+          /**
+           * 此處用來支援 build-lazy-cjs
+           */
+          opts.input,
+        ]
       }),
       babelPluginTsdx({
         exclude: 'node_modules/**',

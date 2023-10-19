@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "tsdx build"
+  },
+  "name": "build-lazy-cjs",
+  "license": "MIT"
+}
