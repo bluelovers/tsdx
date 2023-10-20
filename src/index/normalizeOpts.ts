@@ -6,14 +6,25 @@ import { array_unique } from 'array-hyper-unique';
 
 export function normalizeFormat(rawFormat: string)
 {
-	return array_unique(rawFormat.split(',').map((format: string) =>
-	{
-		if (format === 'es')
+	const list = rawFormat
+		.split(/\s*,\s*/)
+		.map((format: string) =>
 		{
-			return EnumTsdxFormat.esm;
-		}
-		return format;
-	})) as [IModuleFormat, ...IModuleFormat[]]
+			format = format.trim();
+			if (format === 'es')
+			{
+				return EnumTsdxFormat.esm;
+			}
+			return format;
+		})
+	;
+
+	if (list.includes(EnumTsdxFormat.esm))
+	{
+		list.unshift(EnumTsdxFormat.esm);
+	}
+
+	return array_unique(list) as [IModuleFormat, ...IModuleFormat[]]
 }
 
 export function normalizeTarget(opts: WatchOpts)
