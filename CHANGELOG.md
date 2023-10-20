@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.2...@bluelovers/tsdx@3.2.4) (2023-10-20)
+
+
+
+### 🐛　Bug Fixes
+
+* 防止 declaration 無效 ([28e02bb](https://github.com/bluelovers/tsdx/commit/28e02bb81cf1a91763c6d675223cf7430a9addd7))
+
+
+### ✨　Features
+
+* 永遠讓 esm 第一個編譯 ([d75f850](https://github.com/bluelovers/tsdx/commit/d75f850857ad2aa8209498b0efd1b2878d6aeb77))
+
+
+### ♻️　Chores
+
+* relativeApp ([5468ee5](https://github.com/bluelovers/tsdx/commit/5468ee5c51c803dbbfd7d4828f1a7bd87ced57c9))
+
+
+
 ## [3.2.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.1...@bluelovers/tsdx@3.2.2) (2023-10-19)
 
 
