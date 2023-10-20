@@ -1,5 +1,5 @@
 import { realpathSync } from 'fs-extra';
-import { isAbsolute, resolve } from 'upath2';
+import { isAbsolute, resolve, relative } from 'upath2';
 
 import { PackageJson } from './types';
 
@@ -19,6 +19,11 @@ export const external = (id: string) =>
 export const appDirectory = realpathSync(process.cwd());
 export const resolveApp = function(relativePath: string) {
   return resolve(appDirectory, relativePath);
+};
+
+export const relativeApp = function (relativePath: string)
+{
+  return relative(appDirectory, relativePath);
 };
 
 // Taken from Create React App, react-dev-utils/clearConsole

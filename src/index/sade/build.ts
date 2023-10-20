@@ -12,6 +12,7 @@ import { moveTypes } from '../../deprecated';
 import { logError } from '../../logError';
 import { assertCheckEntryExists } from '../checkEntryExists';
 import { defaultFormatOrder, EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
+import { relativeApp } from '../../utils';
 
 prog
 	.command('build')
@@ -75,7 +76,7 @@ prog
 							.then(bundle => bundle.write(inputOptions.output))
 						;
 
-						return logger(p, `[${outputNum}] Building modules: ${inputOptions.output.format}`)
+						return logger(p, `[${outputNum}] Building modules: ${inputOptions.output.format} => ${relativeApp(inputOptions.output.file)}`)
 					}
 				)
 				.tap(moveTypes);
