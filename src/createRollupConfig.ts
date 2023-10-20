@@ -294,8 +294,8 @@ export async function createRollupConfig(
           /**
            * 此處用來支援 build-lazy-cjs
            */
-          opts.input,
-        ]
+          opts.input.endsWith('.cts') && opts.input,
+        ].filter(Boolean)
       }),
       babelPluginTsdx({
         exclude: 'node_modules/**',

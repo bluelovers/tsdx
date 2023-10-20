@@ -20,9 +20,7 @@ describe('build', () =>
 			silent: false,
 		})
 
-		checkCompileFiles({
-			ignoreDeclaration: true,
-		});
+		checkCompileFiles();
 
 		expect(output.code).toBe(0);
 	});
