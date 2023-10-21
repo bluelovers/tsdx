@@ -37,9 +37,16 @@ prog
 		if (opts.config || defaultPathExists)
 		{
 			const jestConfigPath = resolveApp(opts.config || paths.jestConfig);
+
+			console.log(`jestConfigPath:`, jestConfigPath);
+
 			const jestConfigContents: JestConfigOptions = require(jestConfigPath);
 			jestConfig = { ...jestConfig, ...jestConfigContents };
 		}
+
+		console.dir(jestConfig, {
+			colors: true,
+		});
 
 		// if custom path, delete the arg as it's already been merged
 		if (opts.config)
