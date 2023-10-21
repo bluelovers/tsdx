@@ -15,7 +15,7 @@ describe('tsdx build :: invalid build', () =>
 		setupStageWithFixture(testDir, stageName, fixtureName);
 	});
 
-	it.skip('should fail gracefully with exit code 1 when build failed', () =>
+	it('should fail gracefully with exit code 1 when build failed', () =>
 	{
 		const output = execBinWithCache('build');
 		expect(output.code).toBe(1);
