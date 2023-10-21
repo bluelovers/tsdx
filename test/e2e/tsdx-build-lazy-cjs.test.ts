@@ -1,6 +1,8 @@
 import { checkCompileFiles, getStageName, setupStageWithFixture, teardownStage } from '../utils/fixture';
 import { config, exec } from 'shelljs';
 
+config.silent = false;
+
 const testDir = 'e2e';
 const fixtureName = 'build-lazy-cjs';
 const stageName = getStageName(testDir, fixtureName);

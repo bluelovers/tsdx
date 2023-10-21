@@ -3,7 +3,9 @@ import * as shell from 'shelljs';
 import { getFixturePath, setupStageWithFixture, teardownStage } from '../utils/fixture';
 import { join } from 'upath2';
 import { __ROOT_TEST } from '../__root';
-import { exec } from 'shelljs';
+import { config, exec } from 'shelljs';
+
+config.silent = false;
 
 const testDir = 'e2e';
 const fixtureName = 'lint';

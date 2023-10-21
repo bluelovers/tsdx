@@ -6,6 +6,7 @@ import { appPackageJson } from '../appPackageJson';
 import { pathExists } from 'fs-extra';
 import { resolveApp } from '../../utils';
 import { run as jestRun } from 'jest';
+import { mixinJestConfig } from '@bluelovers/jest-config';
 
 prog
 	.command('test')
@@ -71,9 +72,7 @@ prog
 
 		argv.push(
 			'--config',
-			JSON.stringify({
-				...jestConfig,
-			})
+			JSON.stringify(mixinJestConfig(jestConfig, true))
 		);
 
 		const [, ...argsToPassToJestCli] = argv;

@@ -1,11 +1,8 @@
-import * as shell from 'shelljs';
-
-import * as util from '../utils/fixture';
 import { execWithCache, grep } from '../utils/shell';
-import { checkCompileFiles } from '../utils/fixture';
-import { test } from 'shelljs';
+import { checkCompileFiles, setupStageWithFixture, teardownStage } from '../utils/fixture';
+import { config, mv, test } from 'shelljs';
 
-shell.config.silent = false;
+config.silent = false;
 
 const testDir = 'e2e';
 const fixtureName = 'build-default';
@@ -13,8 +10,8 @@ const stageName = `stage-${testDir}-${fixtureName}`;
 
 describe('tsdx build :: zero-config defaults', () => {
   beforeAll(() => {
-    util.teardownStage(stageName);
-    util.setupStageWithFixture(testDir, stageName, fixtureName);
+    teardownStage(stageName);
+    setupStageWithFixture(testDir, stageName, fixtureName);
   });
 
   it('should compile files into a dist directory', () => {
@@ -28,8 +25,8 @@ describe('tsdx build :: zero-config defaults', () => {
   it("shouldn't compile files in test/ or types/", () => {
     const output = execWithCache('node ../dist/index.js build');
 
-    expect(shell.test('-d', 'dist/test/')).toBeFalsy();
-    expect(shell.test('-d', 'dist/types/')).toBeFalsy();
+    expect(test('-d', 'dist/test/')).toBeFalsy();
+    expect(test('-d', 'dist/types/')).toBeFalsy();
 
     expect(output.code).toBe(0);
   });
@@ -96,11 +93,11 @@ describe('tsdx build :: zero-config defaults', () => {
     let output = execWithCache('node ../dist/index.js build');
     expect(output.code).toBe(0);
 
-    shell.mv('package.json', 'package-og.json');
-    shell.mv('package2.json', 'package.json');
+    mv('package.json', 'package-og.json');
+    mv('package2.json', 'package.json');
 
-    shell.mv('dist/index.cjs.development.cjs', 'dist/index.cjs.development.cjs.old');
-    shell.mv('dist/index.esm.mjs', 'dist/index.esm.mjs.old');
+    mv('dist/index.cjs.development.cjs', 'dist/index.cjs.development.cjs.old');
+    mv('dist/index.esm.mjs', 'dist/index.esm.mjs.old');
 
     // cache bust because we want to re-run this command with new package.json
     output = execWithCache('node ../dist/index.js build', { noCache: true });
@@ -119,11 +116,18 @@ describe('tsdx build :: zero-config defaults', () => {
     expect(output.code).toBe(0);
 
     // reset package.json files
-    shell.mv('package.json', 'package2.json');
-    shell.mv('package-og.json', 'package.json');
+    mv('package.json', 'package2.json');
+    mv('package-og.json', 'package.json');
+  });
+
+  it("test", () =>
+  {
+    const output = execWithCache('node ../dist/index.js test');
+
+    expect(output.code).toBe(0);
   });
 
   afterAll(() => {
-    util.teardownStage(stageName);
+    //teardownStage(stageName);
   });
 });
