@@ -1,13 +1,13 @@
-import { execWithCache } from '../utils/shell';
+import { execBinWithCache, shellSilentInCi } from '../utils/shell';
 import {
   checkCompileFiles,
-  checkCompileFilesDeclarationCustom, getStageName,
+  checkCompileFilesDeclarationCustom,
+  getStageName,
   setupStageWithFixture,
   teardownStage,
 } from '../utils/fixture';
-import { config } from 'shelljs';
 
-config.silent = false;
+shellSilentInCi();
 
 const testDir = 'e2e' as const;
 const fixtureName = 'build-withTsconfig' as const;
@@ -20,7 +20,7 @@ describe('tsdx build :: build with custom tsconfig.json options', () => {
   });
 
   it('should use the declarationDir when set', () => {
-    const output = execWithCache('node ../dist/index.js build');
+    const output = execBinWithCache('build');
 
     checkCompileFiles({
       ignoreESM: true,
@@ -33,7 +33,7 @@ describe('tsdx build :: build with custom tsconfig.json options', () => {
   });
 
   it('should set __esModule according to esModuleInterop', () => {
-    const output = execWithCache('node ../dist/index.js build');
+    const output = execBinWithCache('build');
 
     const lib = require(`../../${stageName}/dist/index.cjs.production.min.cjs`);
     // if esModuleInterop: false, no __esModule is added, therefore undefined
@@ -43,8 +43,7 @@ describe('tsdx build :: build with custom tsconfig.json options', () => {
   });
 
   it('should read custom --tsconfig path', () => {
-    const output = execWithCache(
-      'node ../dist/index.js build --format cjs --tsconfig ./src/tsconfig.json'
+    const output = execBinWithCache('build --format cjs --tsconfig ./src/tsconfig.json'
     );
 
     checkCompileFiles({

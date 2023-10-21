@@ -1,11 +1,8 @@
-import * as shell from 'shelljs';
+import { checkCompileFiles, setupStageWithFixture, teardownStage } from '../utils/fixture';
+import { execBinWithCache, grep, shellSilentInCi } from '../utils/shell';
+import { expectShellTestFile } from '../utils/test-utils';
 
-import * as util from '../utils/fixture';
-import { execWithCache, grep } from '../utils/shell';
-import { checkCompileFiles } from '../utils/fixture';
-import { test } from 'shelljs';
-
-shell.config.silent = false;
+shellSilentInCi();
 
 const testDir = 'e2e';
 const fixtureName = 'build-default';
@@ -14,13 +11,12 @@ const stageName = `stage-${testDir}-${fixtureName}`;
 
 describe('tsdx build :: options', () => {
   beforeAll(() => {
-    util.teardownStage(stageName);
-    util.setupStageWithFixture(testDir, stageName, fixtureName);
+    teardownStage(stageName);
+    setupStageWithFixture(testDir, stageName, fixtureName);
   });
 
   it('should compile all formats', () => {
-    const output = execWithCache(
-      'node ../dist/index.js build --format cjs,esm,umd,system'
+    const output = execBinWithCache('build --format cjs,esm,umd,system'
     );
 
     checkCompileFiles();
@@ -32,14 +28,14 @@ describe('tsdx build :: options', () => {
       'dist/index.system.production.min.cjs',
     ].forEach(file =>
     {
-      expect(test('-f', file)).toBeTruthy();
+      expectShellTestFile(file);
     })
 
     expect(output.code).toBe(0);
   });
 
   it.skip('should not bundle regeneratorRuntime when targeting Node', () => {
-    const output = execWithCache('node ../dist/index.js build --target node');
+    const output = execBinWithCache('build --target node');
     expect(output.code).toBe(0);
 
     const matched = grep(/regeneratorRuntime = r/, ['dist/build-default.*.js']);
@@ -47,6 +43,6 @@ describe('tsdx build :: options', () => {
   });
 
   afterAll(() => {
-    util.teardownStage(stageName);
+    teardownStage(stageName);
   });
 });

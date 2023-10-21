@@ -1,9 +1,7 @@
-import { config, test } from 'shelljs';
-
-import { execWithCache } from '../utils/shell';
+import { execBinWithCache, shellSilentInCi } from '../utils/shell';
 import { checkCompileFiles, setupStageWithFixture, teardownStage } from '../utils/fixture';
 
-config.silent = false;
+shellSilentInCi();
 
 const testDir = 'e2e';
 const fixtureName = 'build-invalid';
@@ -19,13 +17,13 @@ describe('tsdx build :: invalid build', () =>
 
 	it.skip('should fail gracefully with exit code 1 when build failed', () =>
 	{
-		const output = execWithCache('node ../dist/index.js build');
+		const output = execBinWithCache('build');
 		expect(output.code).toBe(1);
 	});
 
 	it('should only transpile and not type check', () =>
 	{
-		const output = execWithCache('node ../dist/index.js build --transpileOnly');
+		const output = execBinWithCache('build --transpileOnly');
 
 		checkCompileFiles();
 

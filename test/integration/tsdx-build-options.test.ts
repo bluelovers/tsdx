@@ -1,9 +1,8 @@
-import * as shell from 'shelljs';
-
 import { checkCompileFiles, setupStageWithFixture, teardownStage } from '../utils/fixture';
-import { execWithCache } from '../utils/shell';
+import { execBinWithCache, shellSilentInCi } from '../utils/shell';
+import { expectShellTestFile } from '../utils/test-utils';
 
-shell.config.silent = false;
+shellSilentInCi()
 
 const testDir = 'integration';
 const fixtureName = 'build-options';
@@ -17,17 +16,17 @@ describe('integration :: tsdx build :: options', () => {
   });
 
   it('should create errors/ dir with --extractErrors', () => {
-    const output = execWithCache('node ../dist/index.js build --extractErrors');
+    const output = execBinWithCache('build --extractErrors');
 
-    expect(shell.test('-f', 'errors/ErrorDev.js')).toBeTruthy();
-    expect(shell.test('-f', 'errors/ErrorProd.js')).toBeTruthy();
-    expect(shell.test('-f', 'errors/codes.json')).toBeTruthy();
+    expectShellTestFile('errors/ErrorDev.js');
+    expectShellTestFile('errors/ErrorProd.js');
+    expectShellTestFile('errors/codes.json');
 
     expect(output.code).toBe(0);
   });
 
   it('should have correct errors/codes.json', () => {
-    const output = execWithCache('node ../dist/index.js build --extractErrors');
+    const output = execBinWithCache('build --extractErrors');
 
     const errors = require(`../../${stageName}/errors/codes.json`);
     expect(errors['0']).toBe('error occurred! o no');
@@ -38,7 +37,7 @@ describe('integration :: tsdx build :: options', () => {
   });
 
   it('should compile files into a dist directory', () => {
-    const output = execWithCache('node ../dist/index.js build --extractErrors');
+    const output = execBinWithCache('build --extractErrors');
 
     checkCompileFiles();
 

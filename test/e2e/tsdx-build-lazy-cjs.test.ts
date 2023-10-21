@@ -1,7 +1,7 @@
 import { checkCompileFiles, getStageName, setupStageWithFixture, teardownStage } from '../utils/fixture';
-import { config, exec } from 'shelljs';
+import { execBin, shellSilentInCi } from '../utils/shell';
 
-config.silent = false;
+shellSilentInCi();
 
 const testDir = 'e2e';
 const fixtureName = 'build-lazy-cjs';
@@ -18,7 +18,7 @@ describe('build', () =>
 
 	it('should compile files into a dist directory', () =>
 	{
-		const output = exec('node ../dist/index.js build --format cjs,esm', {
+		const output = execBin('build --format cjs,esm', {
 			silent: false,
 		})
 

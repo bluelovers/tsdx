@@ -1,11 +1,8 @@
-import * as shell from 'shelljs';
-
 import { getFixturePath, setupStageWithFixture, teardownStage } from '../utils/fixture';
 import { join } from 'upath2';
 import { __ROOT_TEST } from '../__root';
-import { config, exec } from 'shelljs';
-
-config.silent = false;
+import { execBin } from '../utils/shell';
+import { expectShellTestFile } from '../utils/test-utils';
 
 const testDir = 'e2e';
 const fixtureName = 'lint';
@@ -18,7 +15,7 @@ function testLintFile(fileName: string, code: number = 0, argv: string | unknown
   const argvString = [argv].flat().join(' ');
 
   const testFile = `${lintDir}/${fileName}`;
-  const output = exec(`node dist/index.js lint "${testFile}" ${argvString}`);
+  const output = execBin(`lint "${testFile}" ${argvString}`);
 
   expect(output.code).toBe(code);
 
@@ -96,7 +93,7 @@ describe('tsdx lint', () => {
   });
 
   it('should not lint', () => {
-    const output = shell.exec(`node dist/index.js lint`);
+    const output = execBin(`lint`);
     expect(output.code).toBe(1);
     expect(output.toString()).toContain('Defaulting to "tsdx lint src test"');
     expect(output.toString()).toContain(
@@ -111,9 +108,9 @@ describe('tsdx lint', () => {
     });
 
     it('should create the file', () => {
-      const output = shell.exec(`node ../dist/index.js lint --write-file`);
+      const output = execBin(`lint --write-file`);
 
-      expect(shell.test('-f', '.eslintrc.js')).toBeTruthy();
+      expectShellTestFile('.eslintrc.js');
       expect(output.code).toBe(0);
     });
 

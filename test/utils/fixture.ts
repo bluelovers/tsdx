@@ -1,14 +1,12 @@
 import path from 'upath2';
-import { cd, config, mkdir, ln, rm, test } from 'shelljs';
+import { cd, ln, mkdir, rm } from 'shelljs';
 import { __ROOT } from '../__root';
 import { copySync } from 'fs-extra';
 import { fsSameRealpath } from 'path-is-same';
 import { grep } from './shell';
+import { expectShellTestFile } from './test-utils';
 
 export const rootDir = __ROOT;
-
-config.silent = true;
-config.verbose = true;
 
 export function getStagePath(stageName: string)
 {
@@ -70,19 +68,19 @@ export function checkCompileFiles(opts?: {
     !opts?.ignoreDeclaration && 'dist/index.d.ts',
   ].forEach(file =>
   {
-    file && expect(test('-f', file)).toBeTruthy();
+    file && expectShellTestFile(file);
   })
 }
 
 export function checkCompileFilesDeclarationCustom(typingsCustom: 'typingsCustom' | 'typings')
 {
-  expect(test('-f', 'dist/index.d.ts')).toBeFalsy();
+  expectShellTestFile('dist/index.d.ts', false);
   [
     `${typingsCustom}/index.d.ts`,
     `${typingsCustom}/index.d.ts.map`,
   ].forEach(file =>
   {
-    expect(test('-f', file)).toBeTruthy();
+    expectShellTestFile(file);
   })
 }
 
