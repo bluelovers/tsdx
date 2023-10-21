@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.6](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.5...@bluelovers/tsdx@3.2.6) (2023-10-21)
+
+
+
+### ✨　Features
+
+* update jest ([8631295](https://github.com/bluelovers/tsdx/commit/86312955b5bfb642dee4463bf65f3f56afbb4b37))
+
+
+
 ## [3.2.5](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.4...@bluelovers/tsdx@3.2.5) (2023-10-21)
 
 
