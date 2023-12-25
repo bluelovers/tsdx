@@ -7,7 +7,7 @@ interface SharedOpts {
   tsconfig?: string;
   // Is error extraction running?
   extractErrors?: boolean;
-  esmMinify: boolean;
+  esmMinify?: boolean;
   targetVersion?: string;
 }
 

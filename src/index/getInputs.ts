@@ -1,10 +1,10 @@
-import { resolveApp } from '../utils';
 import { isDir, isFile, jsOrTs } from './isFile';
 import glob from 'tiny-glob/sync';
 import { NormalizedOpts } from '../types';
 import { IModuleFormat } from '@ts-type/tsdx-extensions-by-format';
 import { map, reduce } from 'bluebird';
 import isGlob from 'is-glob';
+import { resolveApp } from '../constants';
 
 export async function getInputs(
 	entries: string | string[],

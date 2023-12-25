@@ -12,7 +12,8 @@ import { moveTypes } from '../../deprecated';
 import { logError } from '../../logError';
 import { assertCheckEntryExists } from '../checkEntryExists';
 import { defaultFormatOrder, EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
-import { relativeApp } from '../../utils';
+
+import { relativeApp } from '../../constants';
 
 prog
 	.command('build')

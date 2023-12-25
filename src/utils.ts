@@ -1,5 +1,4 @@
-import { realpathSync } from 'fs-extra';
-import { isAbsolute, resolve, relative } from 'upath2';
+import { isAbsolute } from 'upath2';
 
 import { PackageJson } from './types';
 
@@ -14,18 +13,6 @@ export const safePackageName = (name: string) =>
 export const external = (id: string) =>
   !id.startsWith('.') && !isAbsolute(id);
 
-// Make sure any symlinks in the project folder are resolved:
-// https://github.com/facebookincubator/create-react-app/issues/637
-export const appDirectory = realpathSync(process.cwd());
-export const resolveApp = function(relativePath: string) {
-  return resolve(appDirectory, relativePath);
-};
-
-export const relativeApp = function (relativePath: string)
-{
-  return relative(appDirectory, relativePath);
-};
-
 // Taken from Create React App, react-dev-utils/clearConsole
 // @see https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/clearConsole.js
 export function clearConsole() {
@@ -39,11 +26,11 @@ export function getReactVersion({
   devDependencies,
 }: PackageJson) {
   return (
-    (dependencies && dependencies.react) ||
-    (devDependencies && devDependencies.react)
+    (dependencies?.react) ||
+    (devDependencies?.react)
   );
 }
 
 export function getNodeEngineRequirement({ engines }: PackageJson) {
-  return engines && engines.node;
+  return engines?.node;
 }

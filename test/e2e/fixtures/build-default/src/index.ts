@@ -11,6 +11,12 @@ export { merge, mergeAll } from 'lodash/fp';
 
 export { returnsTrue } from './returnsTrue';
 
+/**
+ * sum
+ * @param {number} a
+ * @param {number} b
+ * @returns {number}
+ */
 export const sum = (a: number, b: number) => {
   if ('development' === process.env.NODE_ENV) {
     console.log('dev only output');

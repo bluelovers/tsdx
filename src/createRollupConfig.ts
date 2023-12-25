@@ -22,10 +22,6 @@ import { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 import { assertTsconfigPathExists, handleTsconfigPath } from './utils/ts';
 
-const errorCodeOpts = {
-  errorMapFilePath: paths.appErrorsJson,
-};
-
 // shebang cache map thing because the transform only gets run once
 let shebang: any = {};
 
@@ -34,7 +30,7 @@ export async function createRollupConfig(
   outputNum: number
 ): Promise<RollupOptions> {
   const findAndRecordErrorCodes = await extractErrors({
-    ...errorCodeOpts,
+    errorMapFilePath: paths.appErrorsJson,
     ...opts,
   });
 
@@ -215,6 +211,15 @@ export async function createRollupConfig(
           };
         },
       },
+      cleanup({
+        extensions: [...DEFAULT_BABEL_EXTENSIONS, 'ts', 'tsx'],
+        comments: [
+          'ts',
+          'ts3s',
+          'jsdoc',
+        ],
+        maxEmptyLines: 0,
+      }),
       typescript({
         //verbosity: 1,
         typescript: ts,
@@ -249,6 +254,7 @@ export async function createRollupConfig(
             "allowSyntheticDefaultImports": true,
             "resolveJsonModule": true,
 
+            strictPropertyInitialization: false,
             "strictBindCallApply": true,
             "strictNullChecks": false,
             "strictFunctionTypes": true,
@@ -270,6 +276,7 @@ export async function createRollupConfig(
         tsconfigOverride: {
           compilerOptions: {
             ...parsedConfig.raw.compilerOptions,
+            "strictPropertyInitialization": false,
             // TS -> esnext, then leave the rest to babel-preset-env
             target: 'esnext',
             //"module": "esnext",
@@ -313,7 +320,7 @@ export async function createRollupConfig(
           format: opts.format,
         },
         babelHelpers: 'bundled',
-        inputSourceMap: true,
+        inputSourceMap: true as any,
       } as RollupBabelInputPluginOptions),
       replace({
         preventAssignment: true,
@@ -324,14 +331,6 @@ export async function createRollupConfig(
           '__TSDX_FORMAT__': JSON.stringify(opts.format),
         },
       }),
-      /*
-      cleanup({
-        extensions: [...DEFAULT_BABEL_EXTENSIONS, 'ts', 'tsx'],
-        // @ts-ignore
-        comments: false,
-        maxEmptyLines: 0,
-      }),
-       */
       //sourceMaps(),
       shouldMinify &&
         terser({

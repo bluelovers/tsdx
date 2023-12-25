@@ -1,6 +1,6 @@
 import { stat } from 'fs-extra';
-import { resolveApp } from '../utils';
 import { getExtensionsByFormat, IModuleFormat } from '@ts-type/tsdx-extensions-by-format';
+import { resolveApp } from '../constants';
 
 export const isFile = (name: string) =>
 	stat(name)

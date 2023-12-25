@@ -64,10 +64,10 @@ export function normalizeTarget(opts: WatchOpts)
 	}
 }
 
-export async function normalizeOpts(opts: WatchOpts): Promise<NormalizedOpts>
+export async function normalizeOpts<T extends WatchOpts>(opts: T): Promise<NormalizedOpts & T>
 {
 	const format = normalizeFormat(opts.format);
-	return <NormalizedOpts>{
+	return <NormalizedOpts & T>{
 		...opts,
 		...normalizeTarget(opts),
 		name: opts.name !== 'index' && opts.name || appPackageJson.name,
