@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.6...@bluelovers/tsdx@3.3.0) (2024-02-17)
+
+
+
+### 🐛　Bug Fixes
+
+* better support for dts-bundle-generator ([6b0a142](https://github.com/bluelovers/tsdx/commit/6b0a142ca06eae34d598fc37ef3ee1ccede4e033))
+
+
+### 📦　Code Refactoring
+
+* update test ([cdecff6](https://github.com/bluelovers/tsdx/commit/cdecff610428834286d3251da43bf7c37d176e96))
+
+
+### 📌　Dependencies
+
+* update deps ([90b946a](https://github.com/bluelovers/tsdx/commit/90b946a7a990dedc44d680f3a811547982b6bfd9))
+
+
+### 🔖　Miscellaneous
+
+* . ([d87c79b](https://github.com/bluelovers/tsdx/commit/d87c79b59c407dec676aa1e456f3d5369130121b))
+* . ([143ebb3](https://github.com/bluelovers/tsdx/commit/143ebb3c7c1ae6d3c956ef4256878831cbcf8a29))
+
+
+
 ## [3.2.6](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.2.5...@bluelovers/tsdx@3.2.6) (2023-10-21)
 
 
