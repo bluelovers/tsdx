@@ -83,7 +83,9 @@ export function tsdxDtsBundleGenerator(entries: string | string[], opts: ICliDts
 {
 	const bundlerConfig = handleDtsBundleGeneratorConfig(entries, opts);
 
-	console.dir(bundlerConfig);
+	console.dir(bundlerConfig, {
+		depth: null,
+	});
 
 	const result = generateDtsBundle(bundlerConfig.entries, bundlerConfig.compilationOptions)
 		.map((generatedDts, i) => {
