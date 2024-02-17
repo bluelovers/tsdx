@@ -4,7 +4,7 @@ import { paths } from '../constants';
 import { resolve } from 'upath2';
 import { pathExistsSync } from 'fs-extra';
 
-export function handleTsconfigPath<T extends NormalizedOpts | TsdxOptions>(opts: T)
+export function handleTsconfigPath<T extends Pick<NormalizedOpts | TsdxOptions, 'tsconfig'>>(opts: T)
 {
 	let tsconfig = opts.tsconfig;
 

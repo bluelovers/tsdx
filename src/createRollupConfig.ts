@@ -21,6 +21,7 @@ import { getCurrentTsconfig } from 'get-current-tsconfig';
 import { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 import { assertTsconfigPathExists, handleTsconfigPath } from './utils/ts';
+import { rollupDtsBundleGenerator } from './plugin/rollupDtsBundleGenerator';
 
 // shebang cache map thing because the transform only gets run once
 let shebang: any = {};
@@ -84,6 +85,8 @@ export async function createRollupConfig(
   );
 
   const tsCompilerOptions = parsedConfig.options;
+
+  const useTsconfigDeclarationDir = Boolean(tsCompilerOptions?.declarationDir);
 
   /*
   console.dir({
@@ -294,7 +297,7 @@ export async function createRollupConfig(
           include: tsconfigJSON.include,
         },
         check: !opts.transpileOnly && outputNum === 0,
-        useTsconfigDeclarationDir: Boolean(tsCompilerOptions?.declarationDir),
+        useTsconfigDeclarationDir,
 
         exclude: [
           "*.d.ts", "**/*.d.ts", "**/*.d.cts", "**/*.d.mts",
@@ -357,6 +360,10 @@ export async function createRollupConfig(
           keep_classnames: true,
           keep_fnames: true,
         } as any),
+      outputNum === 0 && rollupDtsBundleGenerator({
+        entries: opts.input,
+        declarationDir: useTsconfigDeclarationDir && tsCompilerOptions.declarationDir,
+      }),
     ],
   } as RollupOptions;
 }

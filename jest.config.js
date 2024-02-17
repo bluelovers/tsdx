@@ -18,6 +18,7 @@ const jestConfig = mixinJestConfig({
 		'<rootDir>/test/.*/fixtures/', // don't run tests in fixtures
 		'<rootDir>/stage-.*/', // don't run tests in auto-generated (and auto-removed) test dirs
 	],
+	"setupFilesAfterEnv": ["jest-expect-message"]
 }, true, {
 	file: __filename,
 });
