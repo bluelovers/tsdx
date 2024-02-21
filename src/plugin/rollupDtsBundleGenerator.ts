@@ -6,6 +6,8 @@ import { readJSONSync } from 'fs-extra';
 import { generateDtsBundle } from 'dts-bundle-generator';
 import { sys as tsSys } from 'typescript';
 import { logError } from '../logError';
+// @ts-ignore
+import { normalizeBundlerConfig } from 'dts-bundle-generator/dist/config-file/normalize-config';
 
 export interface ICliDtsBundleGeneratorConfig
 {
@@ -47,7 +49,7 @@ export function handleDtsBundleGeneratorConfig(entries: string | string[], opts:
 
 	entries = [entries ?? 'src/index.ts'].flat();
 
-	return {
+	return normalizeBundlerConfig({
 		entries: entries.map(inputFile => ({
 			filePath: resolveApp(inputFile),
 			outFile: resolveApp(outputFile),
@@ -76,7 +78,7 @@ export function handleDtsBundleGeneratorConfig(entries: string | string[], opts:
 				? !opts['disable-symlinks-following']
 				: opts['symlinks-following'] ?? false,
 		},
-	} as BundlerConfig
+	}) as BundlerConfig
 }
 
 export function tsdxDtsBundleGenerator(entries: string | string[], opts: ICliDtsBundleGeneratorConfig = {})
