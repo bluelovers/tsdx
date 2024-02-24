@@ -3939,10 +3939,10 @@ dot-prop@^7.2.0:
   dependencies:
     type-fest "^2.11.2"
 
-"dts-bundle-generator@npm:@bluelovers/dts-bundle-generator":
-  version "9.3.1-dev.3"
-  resolved "https://registry.npmjs.org/@bluelovers/dts-bundle-generator/-/dts-bundle-generator-9.3.1-dev.3.tgz#19aa5461ddb886b3c9f80abf64e312bf62491f3d"
-  integrity sha512-Hf8XbJQAb5mxIskAkyrkt/YplOpuQC9tQ/vPZsc2fDW1PNzcZSh1uJhe422LVUoiUYKBcWL6vYBF4HYfK4FKng==
+"dts-bundle-generator@npm:@bluelovers/dts-bundle-generator@9.3.1-dev.7":
+  version "9.3.1-dev.7"
+  resolved "https://registry.npmjs.org/@bluelovers/dts-bundle-generator/-/dts-bundle-generator-9.3.1-dev.7.tgz#a475d90d062a85edbc253b3c8822f50d230b24d1"
+  integrity sha512-kuCfgQBD+CyD+vwEbVhM5w8p0twa6C2oSHXCckAs+aBWh92+3OyCNV25H1BZfhnvQi7Ga3rIEVW2HYhNwS0lrQ==
   dependencies:
     typescript ">=5.0.2"
     yargs "^17.6.0"

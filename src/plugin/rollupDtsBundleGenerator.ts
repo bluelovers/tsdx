@@ -7,11 +7,12 @@ import { generateDtsBundle } from 'dts-bundle-generator';
 import { sys as tsSys } from 'typescript';
 import { logError } from '../logError';
 // @ts-ignore
-import { normalizeBundlerConfig } from 'dts-bundle-generator/dist/config-file/normalize-config';
+import { normalizeBundlerConfig, cliArgumentsEntryPointConfig, cliArgumentsCompilationOptions } from 'dts-bundle-generator/dist/config-file/normalize-config';
 
 export interface ICliDtsBundleGeneratorConfig
 {
 	['no-check']?: boolean,
+	'no-throw-when-check'?: boolean;
 
 	['external-types']?: string[],
 	['external-imports']?: string[],
@@ -50,34 +51,15 @@ export function handleDtsBundleGeneratorConfig(entries: string | string[], opts:
 	entries = [entries ?? 'src/index.ts'].flat();
 
 	return normalizeBundlerConfig({
-		entries: entries.map(inputFile => ({
+		entries: entries.map(inputFile => cliArgumentsEntryPointConfig(opts as any, {
 			filePath: resolveApp(inputFile),
 			outFile: resolveApp(outputFile),
-			noCheck: opts['no-check'],
-			libraries: {
-				allowedTypesLibraries: opts['external-types'],
-				importedLibraries: opts['external-imports'],
-				inlinedLibraries: opts['external-inlines'],
-			},
-			output: {
-				inlineDeclareExternals: opts['inline-declare-externals'],
-				inlineDeclareGlobals: opts['inline-declare-global'] ?? true,
-				umdModuleName: opts['umd-module-name'],
-				sortNodes: opts['sort'],
-				noBanner: opts['no-banner'] ?? true,
-				respectPreserveConstEnum: opts['respect-preserve-const-enum'],
-				exportReferencedTypes: opts['export-referenced-types'],
-			},
-			failOnClass: opts['fail-on-class'],
 		})),
-		compilationOptions: {
+		compilationOptions: cliArgumentsCompilationOptions(opts as any, {
 			preferredConfigPath: handleTsconfigPath({
 				tsconfig: opts['project'],
 			}).tsconfigPath,
-			followSymlinks: typeof opts['disable-symlinks-following'] === 'boolean'
-				? !opts['disable-symlinks-following']
-				: opts['symlinks-following'] ?? false,
-		},
+		}),
 	}) as BundlerConfig
 }
 
@@ -124,6 +106,7 @@ export function rollupDtsBundleGenerator(pluginConfig: IPluginDtsBundleGenerator
 		{
 			try
 			{
+				pluginConfig['no-throw-when-check'] ??= true;
 				tsdxDtsBundleGenerator(pluginConfig.entries, pluginConfig);
 			}
 			catch (e)
