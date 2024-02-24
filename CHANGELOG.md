@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.3.2...@bluelovers/tsdx@3.3.3) (2024-02-24)
+
+
+
+### 🐛　Bug Fixes
+
+* no-throw-when-check ([f7047d2](https://github.com/bluelovers/tsdx/commit/f7047d276b4597db0232ea591513af2a7b6e8e84))
+
+
+
 ## [3.3.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.3.1...@bluelovers/tsdx@3.3.2) (2024-02-21)
 
 
