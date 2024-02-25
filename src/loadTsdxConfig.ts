@@ -3,6 +3,7 @@ import { TsdxOptions } from './types';
 import { paths } from './constants';
 import { ITSResolvable } from 'ts-type/lib/generic';
 import { isFile } from './index/isFile';
+import { dynamicImport } from 'tsimportlib';
 
 export interface ITsdxConfig
 {
@@ -26,9 +27,11 @@ export async function loadTsdxConfig()
 		{
 			if (await isFile(paths.appConfig + ext))
 			{
+				// @ts-ignore
 				if (ext === '.mjs')
 				{
-					tsdxConfig = await import(paths.appConfig + ext);
+					// @see https://github.com/TypeStrong/ts-node/discussions/1290
+					tsdxConfig = await dynamicImport(paths.appConfig + ext, module);
 				}
 				else
 				{
