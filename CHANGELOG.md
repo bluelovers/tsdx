@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.4](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.3.3...@bluelovers/tsdx@3.3.4) (2024-02-25)
+
+
+
+### 🐛　Bug Fixes
+
+* typescript can't output `await import` with `commonjs` ([6134005](https://github.com/bluelovers/tsdx/commit/61340057fbde22c1489978bec66411989ad2035d))
+* wrong async loadTsdxConfig ([367d333](https://github.com/bluelovers/tsdx/commit/367d333f4066046ae9ce0d480df36216e168a79b))
+
+
+### ✨　Features
+
+* support tsdx.config {.js,.cjs,.mjs} ([77c93d9](https://github.com/bluelovers/tsdx/commit/77c93d957cb0f847ea205245a5f066139fe425c2))
+
+
+### 📦　Code Refactoring
+
+* loadTsdxConfig ([db76433](https://github.com/bluelovers/tsdx/commit/db76433e62c89d5bececae58f812fb241b236be9))
+
+
+
 ## [3.3.3](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.3.2...@bluelovers/tsdx@3.3.3) (2024-02-24)
 
 
