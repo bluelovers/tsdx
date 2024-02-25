@@ -1,25 +1,10 @@
 import { OutputOptions, RollupOptions } from 'rollup';
-import { existsSync } from 'fs-extra';
-
-import { paths } from './constants';
 import { NormalizedOpts, TsdxOptions } from './types';
 
 import { createRollupConfig } from './createRollupConfig';
 import { EnumTsdxFormat, IModuleFormat, isAllowedFormat } from '@ts-type/tsdx-extensions-by-format';
 import { map } from 'bluebird';
-
-// check for custom tsdx.config.js
-let tsdxConfig = {
-	rollup(config: RollupOptions, _options: TsdxOptions): RollupOptions
-	{
-		return config;
-	},
-};
-
-if (existsSync(paths.appConfig))
-{
-	tsdxConfig = require(paths.appConfig);
-}
+import { loadTsdxConfig } from './loadTsdxConfig';
 
 export function createBuildAllInputs(opts: NormalizedOpts)
 {
@@ -67,7 +52,7 @@ export async function createBuildConfigs(
 		{
 			// pass the full rollup config to tsdx.config.js override
 			const config = await createRollupConfig(options, index);
-			return tsdxConfig.rollup(config, options) as any;
+			return (await loadTsdxConfig()).rollup(config, options)
 		})
 }
 

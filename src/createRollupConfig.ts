@@ -1,7 +1,7 @@
 import { external, safePackageName } from './utils';
 import { safeVariableName } from 'safe-variable-name';
 import { paths } from './constants';
-import { RollupOptions } from 'rollup';
+import { InputPluginOption, OutputOptions, RollupOptions } from 'rollup';
 import terser from '@rollup/plugin-terser';
 import { DEFAULT_EXTENSIONS as DEFAULT_BABEL_EXTENSIONS } from '@babel/core';
 import commonjs from '@rollup/plugin-commonjs';
@@ -29,7 +29,7 @@ let shebang: any = {};
 export async function createRollupConfig(
   opts: TsdxOptions,
   outputNum: number
-): Promise<RollupOptions> {
+): Promise<RollupOptions & { output: OutputOptions }> {
   const findAndRecordErrorCodes = await extractErrors({
     errorMapFilePath: paths.appErrorsJson,
     ...opts,
@@ -163,7 +163,7 @@ export async function createRollupConfig(
     },
     plugins: [
       !!opts.extractErrors && {
-        async transform(source: any) {
+        async transform(source) {
           await findAndRecordErrorCodes(source);
           return source;
         },
@@ -364,6 +364,6 @@ export async function createRollupConfig(
         entries: opts.input,
         declarationDir: useTsconfigDeclarationDir && tsCompilerOptions.declarationDir,
       }),
-    ],
-  } as RollupOptions;
+    ] as InputPluginOption[],
+  } satisfies RollupOptions & { output: OutputOptions };
 }
