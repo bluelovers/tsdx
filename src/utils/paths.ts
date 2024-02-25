@@ -43,7 +43,7 @@ export function _makeAppPathsCore(cwd?: string)
 			appErrorsJson: resolveApp('errors/codes.json'),
 			appErrors: resolveApp('errors'),
 			appDist: resolveApp('dist'),
-			appConfig: resolveApp('tsdx.config.js'),
+			appConfig: resolveApp('tsdx.config'),
 			jestConfig: resolveApp('jest.config.js'),
 			progressEstimatorCache: resolveApp('node_modules/.cache/.progress-estimator'),
 		} as const,
