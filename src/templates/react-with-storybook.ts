@@ -1,6 +1,5 @@
 import { Template } from './template';
 import reactTemplate from './react';
-import { PackageJson } from 'type-fest';
 
 const storybookTemplate: Template = {
   dependencies: [
@@ -21,7 +20,7 @@ const storybookTemplate: Template = {
       ...reactTemplate.packageJson.scripts,
       storybook: 'start-storybook -p 6006',
       'build-storybook': 'build-storybook',
-    } as PackageJson['scripts'],
+    },
   },
 };
 

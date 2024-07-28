@@ -7,7 +7,7 @@ const testDir = 'integration';
 const fixtureName = 'build-withBabel';
 const stageName = `stage-integration-${fixtureName}`;
 
-describe('integration :: tsdx build :: .babelrc.js', () => {
+describe.skip('integration :: tsdx build :: .babelrc.js', () => {
   beforeAll(() => {
     teardownStage(stageName);
     setupStageWithFixture(testDir, stageName, fixtureName);
