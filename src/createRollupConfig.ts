@@ -80,7 +80,7 @@ export async function createRollupConfig(
     tsconfigJSON,
     ts.sys,
     './',
-    null,
+    void 0,
     tsconfigPath,
   );
 
