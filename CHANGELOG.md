@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@4.0.1...@bluelovers/tsdx@4.0.2) (2024-07-28)
+
+
+
+### 🚨　Tests
+
+* enable test and avoid error ([8adfa7f](https://github.com/bluelovers/tsdx/commit/8adfa7fa9ae4ffcba40c675de00d78e9cf8db8bf))
+
+
+### 📌　Dependencies
+
+* update deps ([a23dbae](https://github.com/bluelovers/tsdx/commit/a23dbae1152c990e03f5917929355737e9ee9d53))
+
+
+
 ## [4.0.1](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@3.4.1...@bluelovers/tsdx@4.0.1) (2024-07-28)
 
 

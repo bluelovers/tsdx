@@ -1,6 +1,6 @@
 {
   "name": "@bluelovers/tsdx",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Zero-config TypeScript package development",
   "keywords": [
     "react",
