@@ -10,7 +10,7 @@ import replace from '@rollup/plugin-replace';
 import resolve, { DEFAULTS as RESOLVE_DEFAULTS } from '@rollup/plugin-node-resolve';
 //import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
-import ts from 'typescript';
+//import ts from 'typescript';
 // @ts-ignore
 import cleanup from 'rollup-plugin-cleanup';
 
@@ -22,6 +22,7 @@ import { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { EnumTsdxFormat } from '@ts-type/tsdx-extensions-by-format';
 import { assertTsconfigPathExists, handleTsconfigPath } from './utils/ts';
 import { rollupDtsBundleGenerator } from './plugin/rollupDtsBundleGenerator';
+import { tryImportTypescript } from './utils/try-import';
 
 // shebang cache map thing because the transform only gets run once
 let shebang: any = {};
@@ -30,6 +31,8 @@ export async function createRollupConfig(
   opts: TsdxOptions,
   outputNum: number
 ): Promise<RollupOptions & { output: OutputOptions }> {
+  const ts = await tryImportTypescript()
+
   const findAndRecordErrorCodes = await extractErrors({
     errorMapFilePath: paths.appErrorsJson,
     ...opts,
