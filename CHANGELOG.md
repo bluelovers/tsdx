@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@4.0.2...@bluelovers/tsdx@4.1.2) (2024-07-29)
+
+
+### BREAKING CHANGES
+
+* try use global typescript
+
+
+
+### ✨　Features
+
+* only load typescript once ([ca8d014](https://github.com/bluelovers/tsdx/commit/ca8d014eec8ccf6115ba9707df6b7e1619dd6271))
+* try use global typescript ([815d4c1](https://github.com/bluelovers/tsdx/commit/815d4c1ccdf72e1dcaf6c092cc4a3618a9402b4e))
+
+
+
 ## [4.0.2](https://github.com/bluelovers/tsdx/compare/@bluelovers/tsdx@4.0.1...@bluelovers/tsdx@4.0.2) (2024-07-28)
 
 
