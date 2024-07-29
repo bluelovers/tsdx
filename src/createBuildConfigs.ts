@@ -5,6 +5,7 @@ import { createRollupConfig } from './createRollupConfig';
 import { EnumTsdxFormat, IModuleFormat, isAllowedFormat } from '@ts-type/tsdx-extensions-by-format';
 import { map } from 'bluebird';
 import { loadTsdxConfig } from './loadTsdxConfig';
+import { tryImportTypescript } from './utils/try-import';
 
 export function createBuildAllInputs(opts: NormalizedOpts)
 {
@@ -49,6 +50,8 @@ export async function createBuildConfigs(
 	const allInputs = createBuildAllInputs(opts);
 
 	const tsdxConfig = await loadTsdxConfig();
+
+	await tryImportTypescript();
 
 	return map(allInputs, async (options: TsdxOptions, index: number) =>
 		{

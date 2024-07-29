@@ -1,5 +1,8 @@
-import { join } from 'path';
+import { join } from 'upath2';
 import { homedir } from 'os';
+import { console } from 'debug-color2';
+
+let ts: typeof import('typescript');
 
 // @ts-ignore
 async function niceTry<T>(fn: () => T)
@@ -21,7 +24,7 @@ function niceTryImport<T>(path: string)
 	return niceTry(() => import(path) as T)
 }
 
-export async function tryImportTypescript(): Promise<typeof import('typescript')>
+async function _tryImportTypescript(): Promise<typeof import('typescript')>
 {
 	const home = homedir();
 	const name = 'typescript';
@@ -37,13 +40,30 @@ export async function tryImportTypescript(): Promise<typeof import('typescript')
 	])
 	{
 		// @ts-ignore
-		let m = await niceTryImport(join(...[v].flat()))
+		const path = join(...[v].flat());
+		// @ts-ignore
+		let m = await niceTryImport(path)
 		if (m)
 		{
+			await niceTryImport(join(path, 'package.json'))
+				.then(v => {
+					console.info(name, `:`, path)
+					// @ts-ignore
+					if (v?.version)
+					{
+						// @ts-ignore
+						console.info('version', `:`, v.version)
+					}
+				})
 			// @ts-ignore
 			return m
 		}
 	}
 
 	return import(name)
+}
+
+export async function tryImportTypescript()
+{
+	return ts ??= await _tryImportTypescript()
 }
