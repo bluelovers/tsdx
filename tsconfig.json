@@ -22,6 +22,8 @@
     "moduleResolution": "node",
     "newLine": "lf",
 
+    "ignoreDeprecations": "6.0",
+
     "sourceMap": true,
     "inlineSources": true
   }
